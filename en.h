@@ -2,7 +2,7 @@
 #ifndef EN_H
 #define S_1 "WELCOME TO GENSHIN IMPACT WISH SIMULATOR Fileout V2.3.12"
 #define S_2 "by Jirehlov Research"
-#define S_3 "Source code available on GitHub: Jirehlov_Genshin-Impact-Wish-Simulator-Flieout"
+#define S_3 "Source code available on GitHub: Jirehlov_Genshin-Impact-Wish-Simulator-Fileout"
 #define S_4 "GPL-3.0 License"
 #define S_72 "Incorrect input!"
 #define S_73 "In total, You have pulled "
