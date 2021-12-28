@@ -1,0 +1,1 @@
+# Genshin-Impact-Wish-Simulator-Fileout
