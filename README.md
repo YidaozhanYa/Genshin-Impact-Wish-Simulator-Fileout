@@ -1,23 +1,29 @@
 ﻿## Genshin-Impact-Wish-Simulator-Fileout
+
 [![License](https://img.shields.io/badge/Licence-GPL-blue.svg)](https://github.com/Jirehlov/GenshinImpactWishSimulatorCLI/blob/master/LICENSE)
 
 ## Other versions
+
 CLI: [Genshin Impact Wish Simulator CLI](https://github.com/Jirehlov/Genshin-Impact-Wish-Simulator-CLI)
 
 ## English
+
 This is a Wish Simulator that output results to a file for Genshin Impact players.
 
 ### Features:
+
 Unlimited number of wishes in one go;\
 Statistics;
 
 ### How to build:
+
 ```
 g++ -s -o3 source.cpp -o giwsfo
 ```
 Or Visual Studio, etc.
 
 ### How to use:
+
 ```
 giwsfo <chosen_banner> <chosen_event> <wishes_number>
 ```
@@ -26,6 +32,7 @@ For exmaple, if you want to pull 100 wishes in Sparkling Steps/20201020-20201110
 giwsfo 1 2 100
 ```
 If no argument is provided, the program will quit.
+**!!!!!It's not recommended to pull too large wishes!!!!!**
 
 No. of banners and events seen as follows:
 
@@ -96,22 +103,27 @@ V Novice Wish\
 
 
 ### About Hidden Possibilities
+
 This simulator includes no hidden possibilities.
 
 
 ## 中文
+
 这是文件输出的无窗口的原神祈愿模拟器。
 
 ### 主要功能：
+
 任意数量抽卡、简略统计信息反馈等
 
 ### 如何编译:
+
 ```
 g++ -s -o3 source.cpp -o giwsfo
 ```
 或者Visual Studio等其他方法。
 
 ### 如何使用:
+
 ```
 giwsfo <卡池类型编号> <活动类型编号> <祈愿数量>
 ```
@@ -120,6 +132,7 @@ giwsfo <卡池类型编号> <活动类型编号> <祈愿数量>
 giwsfo 1 2 100
 ```
 如果没有arguments，模拟器将退出。
+**!!!!!不建议一次性抽取太多次!!!!!**
 
 卡池类型编号与活动类型编号如下:
 
@@ -190,10 +203,12 @@ giwsfo 1 2 100
 
 
 ### 关于隐藏概率（仓检）
+
 本模拟器不考虑仓检。
 
 
 ## Credits
+
 [原神抽卡全机制总结](https://www.bilibili.com/read/cv10468091)\
 [原神抽卡记录数据集](https://github.com/OneBST/GI_gacha_dataset)\
 by [一棵平衡树](https://space.bilibili.com/6165300) aka [OneBST](https://github.com/OneBST)
