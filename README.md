@@ -31,7 +31,7 @@ For exmaple, if you want to pull 100 wishes in Sparkling Steps/20201020-20201110
 ```
 giwsfo 1 2 100
 ```
-If no argument is provided, the program will quit.
+If no argument is provided, the program will quit.\
 **!!!!!It's not recommended to pull too large wishes!!!!!**
 
 No. of banners and events seen as follows:
@@ -131,7 +131,7 @@ giwsfo <卡池类型编号> <活动类型编号> <祈愿数量>
 ```
 giwsfo 1 2 100
 ```
-如果没有arguments，模拟器将退出。
+如果没有arguments，模拟器将退出。\
 **!!!!!不建议一次性抽取太多次!!!!!**
 
 卡池类型编号与活动类型编号如下:
