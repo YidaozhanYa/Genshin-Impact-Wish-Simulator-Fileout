@@ -3,7 +3,6 @@
 #include <fstream>
 #include <random>
 #include <string>
-#include <ctime>
 #include "cn.h" //include the language header file
 
 #define casesx( kind ){   if ((kind) < 15 ) { std::cout << "!!!!!***** "; }\
@@ -832,7 +831,7 @@ set_banner:
                 output_string()
                 if (!((star == 4 && type == 1) || (star == 4 && type == 2))) unmet4_c++;
                 if (!(star == 4 && type == 3)) unmet4_w++;
-                if (!y_arg) {
+                if (y_arg) {
                     luckget()
                     if (star == 4 || star == 5) {
                         for (int templuck : luckstar) {
@@ -993,7 +992,7 @@ set_banner:
                 output_string()
                 if (!((star == 4 && type == 1) || (star == 4 && type == 2))) unmet4_c++;
                 if (!(star == 4 && type == 3)) unmet4_w++;
-                if (!y_arg) {
+                if (y_arg) {
                     luckget()
                     if (star == 4 || star == 5) {
                         for (int templuck : luckstar) {
@@ -1157,7 +1156,7 @@ set_banner:
                 if (!(star == 5 && type == 2)) unmet5_w++;
                 if (!(star == 4 && type == 1)) unmet4_c++;
                 if (!(star == 4 && type == 2)) unmet4_w++;
-                if (!y_arg) {
+                if (y_arg) {
                     luckget()
                     if (star == 4 || star == 5) {
                         for (int templuck : luckstar) {
@@ -1254,7 +1253,7 @@ set_banner:
                     }
                 }
                 output_string()
-                if (!y_arg) {
+                if (y_arg) {
                     luckget()
                         if (star == 4 || star == 5) {
                             for (int templuck : luckstar) {
@@ -1269,6 +1268,7 @@ set_banner:
         }
         else { std::cout << E_7 << endl; goto full_quit; }
         // real work
+        quit = true;
         auto endy = std::chrono::steady_clock::now();
         const std::chrono::time_point<std::chrono::system_clock> endx = std::chrono::system_clock::now();
         auto elapsed = endy - starty;
@@ -1300,6 +1300,36 @@ set_banner:
         for (int iout : four_stars_c) { if (pcount[iout] > 0) std::cout << pnameshort[iout] << "(" << pcount[iout] << ") "; }
         for (int iout : four_stars_w) { if (pcount[iout] > 0) std::cout << pnameshort[iout] << "(" << pcount[iout] << ") "; }
         std::cout << endl << endl;
+        if (countx < 10) { std::cout << S_62 << endl; goto print_1; }
+        std::cout << S_63 << luckiest << endl;
+        for (int templuck = 0; templuck < 10; templuck++) {
+            std::cout << luckiestlocation[templuck] << "(" << luckiestsublocation[templuck] << ")(" << luckiestsubsublocation[templuck] << ") ";
+            casesx(luckiestkind[templuck])
+                std::cout << pname[luckiestkind[templuck]] << endl;
+        }
+    print_1:
+        std::cout << endl;
+        if (chosen_banner == 5 || four_count == 0 || five_count == 0) { wishes_number = 0; std::cout << S_72 << endl; goto print_2; }
+        else if (chosen_banner == 1 || chosen_banner == 2 || chosen_banner == 4) {
+            std::cout << S_88 << endl << endl;
+            for (int iout = 0; iout < 10; iout++) { std::cout << iout + 1 << "  " << four_pity[iout] << "   " << four_pity[iout] * 100.0 / four_count << "%" << endl; }
+            std::cout << "10+  " << four_pity[10] << "   " << four_pity[10] * 100.0 / four_count << "%" << endl << endl << S_89 << endl << endl;
+            for (int iout = 0; iout < 90; iout++) { std::cout << iout + 1 << "  " << five_pity[iout] << "   " << five_pity[iout] * 100.0 / five_count << "%" << endl; }
+            wishes_number = 0;
+            goto print_2;
+        }
+        else if (chosen_banner == 3) {
+            std::cout << S_88 << endl << endl;
+            for (int iout = 0; iout < 10; iout++) { std::cout << iout + 1 << "  " << four_pity[iout] << "   " << four_pity[iout] * 100.0 / four_count << "%" << endl; }
+            std::cout << "10+  " << four_pity[10] << "   " << four_pity[10] * 100.0 / four_count << "%" << endl << endl << S_89 << endl << endl;
+            for (int iout = 0; iout < 80; iout++) { std::cout << iout + 1 << "  " << five_pity_w[iout] << "   " << five_pity_w[iout] * 100.0 / five_count << "%" << endl; }
+            wishes_number = 0;
+            goto print_2;
+        }
+        else {
+            wishes_number = 0; std::cout << E_7 << endl; goto full_quit;
+        }
+    print_2:
         if (y_arg) goto full_quit;
         // a bunch of output of statistics
     }
