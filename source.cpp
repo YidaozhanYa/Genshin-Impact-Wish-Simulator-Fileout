@@ -12,9 +12,9 @@
                     else if ((kind) < 112 ) { std::cout << "!!!!!***** "; }\
                     else {  std::cout << E_1 << endl; goto full_quit; }\
                 } // cout stars prefix
-#define output_string() {if (y_print) {std::cout << countx + 1 << "(" << five_star_assurance_number << ")(" << four_star_assurance_number << ") ";\
+#define output_string() {std::cout << countx + 1 << "(" << five_star_assurance_number << ")(" << four_star_assurance_number << ") ";\
                     casesx( kind )\
-                    std::cout << pname[kind] << endl; }\
+                    std::cout << pname[kind] << endl; \
                     pcount[kind]++;\
                     wishes_number--;\
                     countx++;\
@@ -23,7 +23,7 @@
                     } // cout what have come home
 #define luckcpy() {if (countx == 10) {\
                         luckiest = luck;\
-                        for (int templuck = 0; templuck < 10; templuck++) {\
+                        for (size_t templuck = 0; templuck < 10; templuck++) {\
                             luckiestlocation[templuck] = lucklocation[templuck];\
                             luckiestsublocation[templuck] = lucksublocation[templuck];\
                             luckiestsubsublocation[templuck] = lucksubsublocation[templuck];\
@@ -32,7 +32,7 @@
                     }\
                     if (luck > luckiest) {\
                         luckiest = luck;\
-                        for (int templuck = 0; templuck < 10; templuck++) {\
+                        for (size_t templuck = 0; templuck < 10; templuck++) {\
                             luckiestlocation[templuck] = lucklocation[templuck];\
                             luckiestsublocation[templuck] = lucksublocation[templuck];\
                             luckiestsubsublocation[templuck] = lucksubsublocation[templuck];\
@@ -40,7 +40,7 @@
                         }\
                     }\
                 } // snapshot the luckiest moment
-#define luckget() {for (int templuck = 0; templuck < 9; templuck++) {\
+#define luckget() {for (size_t templuck = 0; templuck < 9; templuck++) {\
                         lucklocation[templuck] = lucklocation[templuck + 1];\
                         lucksublocation[templuck] = lucksublocation[templuck + 1];\
                         lucksubsublocation[templuck] = lucksubsublocation[templuck + 1];\
@@ -48,15 +48,14 @@
                         luckstar[templuck] = luckstar[templuck + 1];\
                     }\
                     lucklocation[9] = countx;\
-                    lucksublocation[9] = (long long int) five_star_assurance_number - 1;\
-                    lucksubsublocation[9] = (long long int) four_star_assurance_number - 1;\
+                    lucksublocation[9] = static_cast<size_t> (five_star_assurance_number) - 1;\
+                    lucksubsublocation[9] = static_cast<size_t> (four_star_assurance_number) - 1;\
                     luckkind[9] = kind;\
                     luckstar[9] = star;\
                     luck = 0;\
                 } // get the recorded luckiest
 #define Tri() {\
                 star = 3;\
-                type = 2;\
                 kind = rspick(three_g, 13);\
                 } // 3-star kind settler for all banners
 #define set_pool_1_m(up_five_m,size_nup_four_c_m, nup_four_cgm) {\
@@ -68,37 +67,34 @@
 
 using namespace std;
 
-unsigned long long int seed = static_cast<unsigned long long int> (std::chrono::high_resolution_clock::now().time_since_epoch().count());
+size_t seed = static_cast<size_t>(std::chrono::high_resolution_clock::now().time_since_epoch().count());
 std::mt19937_64 generatorz(seed);
 // random set
 
 bool quit = true,
 is_noelle = true,
-y_print = true,
 y_arg = false,
 five_star_guarantee_number = false,
 four_star_guarantee_number = false;
-int chosen_banner = 0,
-chosen_event = 0,
-four_star_assurance_number = 1,
-five_star_assurance_number = 1,
-max_fives = 1,
-min_fives = INT_MAX,
-fate_weapon = 0,
-fate_points = 0,
-five_weight = 0,
-four_weight = 0,
-three_weight = 0,
-unmet4_c = 0,
-unmet4_w = 0,
-unmet5_c = 0,
-unmet5_w = 0,
+size_t fate_points = 0,
 resultt = 0,
 resultu = 0,
 up_five = 0,
 size_nup_four_c = 1,
 luck = 0,
 luckiest = 0,
+countx = 0,
+five_count = 0,
+five_count_c = 0,
+five_count_w = 0,
+four_count = 0,
+four_count_c = 0,
+four_count_w = 0,
+ave_fives = 0,
+max_fivesth = 1,
+min_fivesth = 1,
+max_fivecount = 1,
+min_fivecount = 1,
 nup_five_c[32] = { 0, 1, 2, 3, 4 },
 nup_five_w[32] = { 5, 6, 7, 8, 9, 10, 11, 12, 13, 14 },
 nup_four_w[64] = { 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49 },
@@ -117,19 +113,27 @@ four_stars_c[23] = { 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29,
 four_stars_w[27] = { 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 79, 80, 82, 83, 84, 88, 102, 103, 104 },
 five_stars_c[23] = { 0, 1, 2, 3, 4, 63, 64, 65, 66, 67, 68, 69, 70, 72, 86, 89, 90, 94, 96, 99, 105, 109, 111 },
 five_stars_w[26] = { 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 73, 74, 75, 76, 77, 78, 81, 85, 87, 92, 93, 97, 98, 101, 107, 110 };
-long long int countx = 0,
-wishes_number = 0,
-five_count = 0,
-five_count_c = 0,
-five_count_w = 0,
-four_count = 0,
-four_count_c = 0,
-four_count_w = 0,
-ave_fives = 0,
-max_fivesth = 1,
-min_fivesth = 1,
-max_fivecount = 1,
-min_fivecount = 1;
+std::chrono::system_clock::time_point starty = std::chrono::system_clock::now();
+std::chrono::system_clock::time_point endy = std::chrono::system_clock::now();
+std::chrono::nanoseconds elapsed = starty - endy;
+std::time_t t_start = std::chrono::system_clock::to_time_t(starty);
+std::time_t t_end = std::chrono::system_clock::to_time_t(endy);
+ptrdiff_t chosen_event = 0,
+chosen_banner = 0,
+unmet4_c = 0,
+unmet4_w = 0,
+unmet5_c = 0,
+unmet5_w = 0,
+four_star_assurance_number = 1,
+five_star_assurance_number = 1,
+max_fives = 1,
+min_fives = PTRDIFF_MAX,
+five_weight = 0,
+four_weight = 0,
+three_weight = 0,
+fate_weapon = 0;
+_int64 wishes_number = 0;
+auto elapsed_time = std::chrono::duration_cast<std::chrono::microseconds>(elapsed).count();
 
 const char* pname[128] = { C_0, C_1, C_2, C_3, C_4, C_5, C_6, C_7, C_8, C_9, C_10, C_11, C_12, C_13, C_14, C_15, C_16, C_17, C_18, C_19, C_20,
                 C_21, C_22, C_23, C_24, C_25, C_26, C_27, C_28, C_29, C_30, C_31, C_32, C_33, C_34, C_35, C_36, C_37, C_38, C_39, C_40,
@@ -179,10 +183,10 @@ const char* pnameshort[128] = { X_0, X_1, X_2, X_3, X_4, X_5, X_6, X_7, X_8, X_9
 };
 // names of the items
 
-int rspick(const int* kindx, int sizekind) {
-    int kindout = kindx[1];
-    int index = 0;
-    unsigned long long int temp121 = 0;
+static size_t rspick(const size_t* kindx, size_t sizekind) {
+    size_t kindout = kindx[1];
+    size_t index = 0;
+    size_t temp121 = 0;
     for (; index < sizekind; index++)
     {
         temp121 = generatorz() % (static_cast<unsigned long long int>(index) + 1);
@@ -192,15 +196,15 @@ int rspick(const int* kindx, int sizekind) {
 }
 // randomly pick an element among kindx which size is sizekind
 
-int WRSpick(const int* weightx, int nom) {
-    int ceilling = 0;
-    for (int inin = 0; inin < nom; inin++) ceilling += weightx[inin];
-    const int typess1[3] = { 0, 1, 2 };
-    const int typess2[2] = { 0, 1 };
+static size_t WRSpick(const ptrdiff_t* weightx, size_t nom) {
+    ptrdiff_t ceilling = 1;
+    for (size_t inin = 0; inin < nom; inin++) ceilling += weightx[inin];
+    const size_t typess1[3] = { 0, 1, 2 };
+    const size_t typess2[2] = { 0, 1 };
     if (nom == 3 && ceilling > 10000) ceilling = 10000;
-    int randomn = static_cast<int> (generatorz() % static_cast<unsigned long long int>(ceilling));
-    int tc = 0, results = 0;
-    for (int inin = 0; inin < nom; inin++) {
+    ptrdiff_t randomn = static_cast<ptrdiff_t> (generatorz() % static_cast<size_t>(ceilling));
+    size_t tc = 0, results = 0;
+    for (size_t inin = 0; inin < nom; inin++) {
         if (randomn < weightx[inin]) {
             if (nom == 3) results = typess1[tc];
             else results = typess2[tc];
@@ -215,30 +219,30 @@ int WRSpick(const int* weightx, int nom) {
 }
 // weighted random sampling
 
-void set_pool_1(int up_five_p, int size_nup_four_c_p, const int* tempg1, const int* tempg5, int* up_four_g, int* nup_four_c, const int* nup_four_cgm, int* four_check) {
+static void set_pool_1(size_t up_five_p, size_t size_nup_four_c_p, const size_t* tempg1, const size_t* tempg5, size_t* up_four_g, size_t* nup_four_c, const size_t* nup_four_cgm, size_t* four_check) {
     up_five = up_five_p;
     size_nup_four_c = size_nup_four_c_p;
-    for (int i = 0; i < 3; i++) { up_four_g[i] = tempg1[i]; }
-    for (int i = 0; i < size_nup_four_c; i++) { nup_four_c[i] = nup_four_cgm[i]; }
-    for (int i = 0; i < 8; i++) { four_check[i] = tempg5[i]; }
+    for (size_t i = 0; i < 3; i++) { up_four_g[i] = tempg1[i]; }
+    for (size_t i = 0; i < size_nup_four_c; i++) { nup_four_c[i] = nup_four_cgm[i]; }
+    for (size_t i = 0; i < 8; i++) { four_check[i] = tempg5[i]; }
 }
 
-void set_pool_3(int* up_five_g, int size_nup_four_c_p, const int* tempg1, const int* tempg5, const int* tempg6, const int* tempg7, int* up_four_g, int* nup_four_c, const int* nup_four_cgm, int* four_check, int* five_check) {
-    for (int i = 0; i < 2; i++) { up_five_g[i] = tempg6[i]; }
+static void set_pool_3(size_t* up_five_g, size_t size_nup_four_c_p, const size_t* tempg1, const size_t* tempg5, const size_t* tempg6, const size_t* tempg7, size_t* up_four_g, size_t* nup_four_c, const size_t* nup_four_cgm, size_t* four_check, size_t* five_check) {
+    for (size_t i = 0; i < 2; i++) { up_five_g[i] = tempg6[i]; }
     size_nup_four_c = size_nup_four_c_p;
-    for (int i = 0; i < 5; i++) { up_four_g[i] = tempg1[i]; }
-    for (int i = 0; i < size_nup_four_c; i++) { nup_four_c[i] = nup_four_cgm[i]; }
-    for (int i = 0; i < 8; i++) { four_check[i] = tempg5[i]; }
-    for (int i = 0; i < 8; i++) { five_check[i] = tempg7[i]; }
+    for (size_t i = 0; i < 5; i++) { up_four_g[i] = tempg1[i]; }
+    for (size_t i = 0; i < size_nup_four_c; i++) { nup_four_c[i] = nup_four_cgm[i]; }
+    for (size_t i = 0; i < 8; i++) { four_check[i] = tempg5[i]; }
+    for (size_t i = 0; i < 8; i++) { five_check[i] = tempg7[i]; }
 }
 
 int main(int argc, char* argv[]) {
     std::ofstream ofs{ "output.txt" };
+    std::streambuf* coutbuf = std::cout.rdbuf();
     std::cout.rdbuf(ofs.rdbuf());
     static char default_argv0[] = "giwscli";
     if (!argv[0] || !argv[0][0])
         argv[0] = default_argv0;
-    y_print = true;
     quit = true,
     is_noelle = true,
     five_star_guarantee_number = false,
@@ -248,7 +252,7 @@ int main(int argc, char* argv[]) {
     four_star_assurance_number = 1,
     five_star_assurance_number = 1,
     max_fives = 1,
-    min_fives = INT_MAX,
+    min_fives = PTRDIFF_MAX,
     fate_weapon = 0,
     fate_points = 0,
     five_weight = 0,
@@ -276,15 +280,15 @@ int main(int argc, char* argv[]) {
     min_fivesth = 1,
     max_fivecount = 1,
     min_fivecount = 1;
-    int up_five_g[32] = { 0 },
+    size_t up_five_g[32] = { 0 },
         up_four_g[64] = { 0 },
         nup_four_c[64] = { 0 },
         luckkind[10] = { 127, 127, 127, 127, 127, 127, 127, 127, 127, 127 },
         luckstar[10] = { 3, 3, 3, 3, 3, 3, 3, 3, 3, 3 },
         luckiestkind[10] = { 127, 127, 127, 127, 127, 127, 127, 127, 127, 127 },
         five_check[8] = { 127, 127, 127, 127, 127, 127, 127, 127 },
-        four_check[8] = { 127, 127, 127, 127, 127, 127, 127, 127 };
-    long long int lucklocation[10] = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 },
+        four_check[8] = { 127, 127, 127, 127, 127, 127, 127, 127 },
+        lucklocation[10] = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 },
         lucksublocation[10] = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 },
         lucksubsublocation[10] = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 },
         luckiestlocation[10] = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 },
@@ -295,10 +299,11 @@ int main(int argc, char* argv[]) {
         five_pity[90] = { 0 },
         five_pity_w[80] = { 0 };
     if (argc == 4) {
-        int test;
+        int test0, test1;
         long long int test2;
         try {
-            test = stoi(argv[1]) + stoi(argv[2]);
+            test0 = stoi(argv[1]);
+            test1 = stoi(argv[2]);
             test2 = stoll(argv[3]);
         }
         catch (...) {
@@ -328,376 +333,376 @@ set_banner:
     if (chosen_banner == 1) {
         switch (chosen_event) {
         case 1: {
-            int tempg1[3] = { 22, 26, 30 };
-            int tempg5[8] = { 22, 26, 30, 0, 0, 0, 0, 0 };
+            size_t tempg1[3] = { 22, 26, 30 };
+            size_t tempg5[8] = { 22, 26, 30, 0, 0, 0, 0, 0 };
             set_pool_1_m(63, 11, nup_four_cg1)
         } break;
         case 2: {
-            int tempg1[3] = { 17, 20, 24 };
-            int tempg5[8] = { 17, 20, 24, 0, 0, 0, 0, 0 };
+            size_t tempg1[3] = { 17, 20, 24 };
+            size_t tempg5[8] = { 17, 20, 24, 0, 0, 0, 0, 0 };
             set_pool_1_m(64, 11, nup_four_cg1)
         } break;
         case 3: {
-            int tempg1[3] = { 18, 23, 25 };
-            int tempg5[8] = { 23, 25, 0, 0, 0, 0, 0, 0 };
+            size_t tempg1[3] = { 18, 23, 25 };
+            size_t tempg5[8] = { 23, 25, 0, 0, 0, 0, 0, 0 };
             set_pool_1_m(65, 11, nup_four_cg1)
         } break;
         case 4: {
-            int tempg1[3] = { 16, 19, 28 };
-            int tempg5[8] = { 19, 28, 0, 0, 0, 0, 0, 0 };
+            size_t tempg1[3] = { 16, 19, 28 };
+            size_t tempg5[8] = { 19, 28, 0, 0, 0, 0, 0, 0 };
             set_pool_1_m(66, 11, nup_four_cg1)
         } break;
         case 5: {
-            int tempg1[3] = { 17, 21, 22 };
-            int tempg5[8] = { 17, 21, 22, 0, 0, 0, 0, 0 };
+            size_t tempg1[3] = { 17, 21, 22 };
+            size_t tempg5[8] = { 17, 21, 22, 0, 0, 0, 0, 0 };
             set_pool_1_m(67, 13, nup_four_cg2)
         } break;
         case 6: {
-            int tempg1[3] = { 22, 24, 26 };
-            int tempg5[8] = { 22, 24, 26, 0, 0, 0, 0, 0 };
+            size_t tempg1[3] = { 22, 24, 26 };
+            size_t tempg5[8] = { 22, 24, 26, 0, 0, 0, 0, 0 };
             set_pool_1_m(68, 13, nup_four_cg2)
         } break;
         case 7: {
-            int tempg1[3] = { 16, 18, 25 };
-            int tempg5[8] = { 16, 18, 25, 0, 0, 0, 0, 0 };
+            size_t tempg1[3] = { 16, 18, 25 };
+            size_t tempg5[8] = { 16, 18, 25, 0, 0, 0, 0, 0 };
             set_pool_1_m(69, 13, nup_four_cg2)
         } break;
         case 8: {
-            int tempg1[3] = { 21, 23, 30 };
-            int tempg5[8] = { 21, 23, 30, 0, 0, 0, 0, 0 };
+            size_t tempg1[3] = { 21, 23, 30 };
+            size_t tempg5[8] = { 21, 23, 30, 0, 0, 0, 0, 0 };
             set_pool_1_m(0, 13, nup_four_cg2)
             five_check[0] = 0;
         } break;
         case 9: {
-            int tempg1[3] = { 19, 24, 26 };
-            int tempg5[8] = { 19, 24, 26, 0, 0, 0, 0, 0 };
+            size_t tempg1[3] = { 19, 24, 26 };
+            size_t tempg5[8] = { 19, 24, 26, 0, 0, 0, 0, 0 };
             set_pool_1_m(70, 13, nup_four_cg2)
         } break;
         case 10: {
-            int tempg1[3] = { 17, 20, 28 };
-            int tempg5[8] = { 17, 20, 28, 0, 0, 0, 0, 0 };
+            size_t tempg1[3] = { 17, 20, 28 };
+            size_t tempg5[8] = { 17, 20, 28, 0, 0, 0, 0, 0 };
             set_pool_1_m(63, 13, nup_four_cg2)
         } break;
         case 11: {
-            int tempg1[3] = { 15, 22, 30 };
-            int tempg5[8] = { 22, 30, 0, 0, 0, 0, 0, 0 };
+            size_t tempg1[3] = { 15, 22, 30 };
+            size_t tempg5[8] = { 22, 30, 0, 0, 0, 0, 0, 0 };
             set_pool_1_m(65, 13, nup_four_cg2)
         } break;
         case 12: {
-            int tempg1[3] = { 71, 20, 18 };
-            int tempg5[8] = { 18, 20, 0, 0, 0, 0, 0, 0 };
+            size_t tempg1[3] = { 71, 20, 18 };
+            size_t tempg5[8] = { 18, 20, 0, 0, 0, 0, 0, 0 };
             set_pool_1_m(66, 14, nup_four_cg3)
         } break;
         case 13: {
-            int tempg1[3] = { 16, 24, 25 };
-            int tempg5[8] = { 16, 24, 25, 0, 0, 0, 0, 0 };
+            size_t tempg1[3] = { 16, 24, 25 };
+            size_t tempg5[8] = { 16, 24, 25, 0, 0, 0, 0, 0 };
             set_pool_1_m(72, 14, nup_four_cg3)
         } break;
         case 14: {
-            int tempg1[3] = { 17, 22, 30 };
-            int tempg5[8] = { 17, 22, 30, 0, 0, 0, 0, 0 };
+            size_t tempg1[3] = { 17, 22, 30 };
+            size_t tempg5[8] = { 17, 22, 30, 0, 0, 0, 0, 0 };
             set_pool_1_m(64, 15, nup_four_cg4)
         } break;
         case 15: {
-            int tempg1[3] = { 15, 21, 28 };
-            int tempg5[8] = { 15, 21, 28, 0, 0, 0, 0, 0 };
+            size_t tempg1[3] = { 15, 21, 28 };
+            size_t tempg5[8] = { 15, 21, 28, 0, 0, 0, 0, 0 };
             set_pool_1_m(86, 15, nup_four_cg4)
         } break;
         case 16: {
-            int tempg1[3] = { 71, 23, 19 };
-            int tempg5[8] = { 71, 23, 19, 0, 0, 0, 0, 0 };
+            size_t tempg1[3] = { 71, 23, 19 };
+            size_t tempg5[8] = { 71, 23, 19, 0, 0, 0, 0, 0 };
             set_pool_1_m(89, 15, nup_four_cg4)
         } break;
         case 17: {
-            int tempg1[3] = { 91, 16, 18 };
-            int tempg5[8] = { 16, 18, 0, 0, 0, 0, 0, 0 };
+            size_t tempg1[3] = { 91, 16, 18 };
+            size_t tempg5[8] = { 16, 18, 0, 0, 0, 0, 0, 0 };
             set_pool_1_m(90, 15, nup_four_cg4)
         } break;
         case 18: {
-            int tempg1[3] = { 95, 17, 26 };
-            int tempg5[8] = { 17, 26, 0, 0, 0, 0, 0, 0 };
+            size_t tempg1[3] = { 95, 17, 26 };
+            size_t tempg5[8] = { 17, 26, 0, 0, 0, 0, 0, 0 };
             set_pool_1_m(96, 16, nup_four_cg5)
         } break;
         case 19: {
-            int tempg1[3] = { 15, 24, 25 };
-            int tempg5[8] = { 15, 24, 25, 0, 0, 0, 0, 0 };
+            size_t tempg1[3] = { 15, 24, 25 };
+            size_t tempg5[8] = { 15, 24, 25, 0, 0, 0, 0, 0 };
             set_pool_1_m(94, 16, nup_four_cg5)
         } break;
         case 20: {
-            int tempg1[3] = { 23, 19, 71 };
-            int tempg5[8] = { 23, 19, 71, 0, 0, 0, 0, 0 };
+            size_t tempg1[3] = { 23, 19, 71 };
+            size_t tempg5[8] = { 23, 19, 71, 0, 0, 0, 0, 0 };
             set_pool_1_m(65, 17, nup_four_cg6)
         } break;
         case 21: {
-            int tempg1[3] = { 100, 18, 91 };
-            int tempg5[8] = { 18, 91, 0, 0, 0, 0, 0, 0 };
+            size_t tempg1[3] = { 100, 18, 91 };
+            size_t tempg5[8] = { 18, 91, 0, 0, 0, 0, 0, 0 };
             set_pool_1_m(70, 17, nup_four_cg6)
         } break;
         case 22: {
-            int tempg1[3] = { 15, 20, 21 };
-            int tempg5[8] = { 15, 20, 21, 0, 0, 0, 0, 0 };
+            size_t tempg1[3] = { 15, 20, 21 };
+            size_t tempg5[8] = { 15, 20, 21, 0, 0, 0, 0, 0 };
             set_pool_1_m(67, 18, nup_four_cg7)
         } break;
         case 23: {
-            int tempg1[3] = { 26, 30, 106 };
-            int tempg5[8] = { 26, 30, 0, 0, 0, 0, 0, 0 };
+            size_t tempg1[3] = { 26, 30, 106 };
+            size_t tempg5[8] = { 26, 30, 0, 0, 0, 0, 0, 0 };
             set_pool_1_m(105, 18, nup_four_cg7)
         } break;
         case 24: {
-            int tempg1[3] = { 19, 23, 108 };
-            int tempg5[8] = { 19, 23, 0, 0, 0, 0, 0, 0 };
+            size_t tempg1[3] = { 19, 23, 108 };
+            size_t tempg5[8] = { 19, 23, 0, 0, 0, 0, 0, 0 };
             set_pool_1_m(109, 19, nup_four_cg8)
         } break;
         case 25: {
-            int tempg1[3] = { 26, 30, 106 };
-            int tempg5[8] = { 26, 30, 0, 0, 0, 0, 0, 0 };
+            size_t tempg1[3] = { 26, 30, 106 };
+            size_t tempg5[8] = { 26, 30, 0, 0, 0, 0, 0, 0 };
             set_pool_1_m(66, 19, nup_four_cg8)
         } break;
-        default: { std::cout << E_5 << endl; goto full_quit; } break;
+        default: { std::cout << E_5 << endl; goto full_quit; }
         }
     }
     else if (chosen_banner == 2) {
         switch (chosen_event) {
         case 1: {
-            int tempg1[3] = { 15, 20, 21 };
-            int tempg5[8] = { 15, 20, 21, 0, 0, 0, 0, 0 };
+            size_t tempg1[3] = { 15, 20, 21 };
+            size_t tempg5[8] = { 15, 20, 21, 0, 0, 0, 0, 0 };
             set_pool_1_m(72, 18, nup_four_cg7)
         } break;
         case 2: {
-            int tempg1[3] = { 19, 23, 108 };
-            int tempg5[8] = { 19, 23, 0, 0, 0, 0, 0, 0 };
+            size_t tempg1[3] = { 19, 23, 108 };
+            size_t tempg5[8] = { 19, 23, 0, 0, 0, 0, 0, 0 };
             set_pool_1_m(69, 19, nup_four_cg8)
         } break;
         case 3: {
-            int tempg1[3] = { 26, 30, 106 };
-            int tempg5[8] = { 26, 30, 0, 0, 0, 0, 0, 0 };
+            size_t tempg1[3] = { 26, 30, 106 };
+            size_t tempg5[8] = { 26, 30, 0, 0, 0, 0, 0, 0 };
             set_pool_1_m(68, 19, nup_four_cg8)
         } break;
-        default: { std::cout << E_5 << endl; goto full_quit; } break;
+        default: { std::cout << E_5 << endl; goto full_quit; }
         }
     }
     else if (chosen_banner == 3) {
         switch (chosen_event) {
         case 1: {
-            int tempg6[2] = { 5, 14 };
-            int tempg1[5] = { 34, 38, 40, 44, 48 };
-            int tempg5[8] = { 34, 38, 40, 44, 48, 0, 0, 0 };
-            int tempg7[8] = { 5, 14, 0, 0, 0, 0, 0, 0 };
+            size_t tempg6[2] = { 5, 14 };
+            size_t tempg1[5] = { 34, 38, 40, 44, 48 };
+            size_t tempg5[8] = { 34, 38, 40, 44, 48, 0, 0, 0 };
+            size_t tempg7[8] = { 5, 14, 0, 0, 0, 0, 0, 0 };
             set_pool_3_m(11, nup_four_cg1)
         } break;
         case 2: {
-            int tempg6[2] = { 7, 11 };
-            int tempg1[5] = { 33, 37, 41, 43, 49 };
-            int tempg5[8] = { 33, 37, 41, 43, 49, 0, 0, 0 };
-            int tempg7[8] = { 7, 11, 0, 0, 0, 0, 0, 0 };
+            size_t tempg6[2] = { 7, 11 };
+            size_t tempg1[5] = { 33, 37, 41, 43, 49 };
+            size_t tempg5[8] = { 33, 37, 41, 43, 49, 0, 0, 0 };
+            size_t tempg7[8] = { 7, 11, 0, 0, 0, 0, 0, 0 };
             set_pool_3_m(11, nup_four_cg1)
         } break;
         case 3: {
-            int tempg6[2] = { 6, 73 };
-            int tempg1[5] = { 32, 36, 40, 42, 48 };
-            int tempg5[8] = { 32, 36, 40, 42, 48, 0, 0, 0 };
-            int tempg7[8] = { 6, 0, 0, 0, 0, 0, 0, 0 };
+            size_t tempg6[2] = { 6, 73 };
+            size_t tempg1[5] = { 32, 36, 40, 42, 48 };
+            size_t tempg5[8] = { 32, 36, 40, 42, 48, 0, 0, 0 };
+            size_t tempg7[8] = { 6, 0, 0, 0, 0, 0, 0, 0 };
             set_pool_3_m(11, nup_four_cg1)
         } break;
         case 4: {
-            int tempg6[2] = { 74, 75 };
-            int tempg1[5] = { 35, 39, 41, 44, 46 };
-            int tempg5[8] = { 35, 39, 41, 44, 46, 0, 0, 0 };
-            int tempg7[8] = { 0, 0, 0, 0, 0, 0, 0, 0 };
+            size_t tempg6[2] = { 74, 75 };
+            size_t tempg1[5] = { 35, 39, 41, 44, 46 };
+            size_t tempg5[8] = { 35, 39, 41, 44, 46, 0, 0, 0 };
+            size_t tempg7[8] = { 0, 0, 0, 0, 0, 0, 0, 0 };
             set_pool_3_m(11, nup_four_cg1)
         } break;
         case 5: {
-            int tempg6[2] = { 8, 76 };
-            int tempg1[5] = { 34, 37, 40, 45, 49 };
-            int tempg5[8] = { 34, 37, 40, 45, 49, 0, 0, 0 };
-            int tempg7[8] = { 8, 0, 0, 0, 0, 0, 0, 0 };
+            size_t tempg6[2] = { 8, 76 };
+            size_t tempg1[5] = { 34, 37, 40, 45, 49 };
+            size_t tempg5[8] = { 34, 37, 40, 45, 49, 0, 0, 0 };
+            size_t tempg7[8] = { 8, 0, 0, 0, 0, 0, 0, 0 };
             set_pool_3_m(13, nup_four_cg2)
         } break;
         case 6: {
-            int tempg6[2] = { 5, 12 };
+            size_t tempg6[2] = { 5, 12 };
             size_nup_four_c = 13;
-            int tempg1[5] = { 35, 36, 41, 44, 47 };
-            int tempg5[8] = { 35, 36, 41, 44, 47, 0, 0, 0 };
-            int tempg7[8] = { 5, 12, 0, 0, 0, 0, 0, 0 };
+            size_t tempg1[5] = { 35, 36, 41, 44, 47 };
+            size_t tempg5[8] = { 35, 36, 41, 44, 47, 0, 0, 0 };
+            size_t tempg7[8] = { 5, 12, 0, 0, 0, 0, 0, 0 };
             set_pool_3_m(13, nup_four_cg2)
         } break;
         case 7: {
-            int tempg6[2] = { 9, 77 };
-            int tempg1[5] = { 32, 36, 40, 43, 48 };
-            int tempg5[8] = { 32, 36, 40, 43, 48, 0, 0, 0 };
-            int tempg7[8] = { 9, 0, 0, 0, 0, 0, 0, 0 };
+            size_t tempg6[2] = { 9, 77 };
+            size_t tempg1[5] = { 32, 36, 40, 43, 48 };
+            size_t tempg5[8] = { 32, 36, 40, 43, 48, 0, 0, 0 };
+            size_t tempg7[8] = { 9, 0, 0, 0, 0, 0, 0, 0 };
             set_pool_3_m(13, nup_four_cg2)
         } break;
         case 8: {
-            int tempg6[2] = { 11, 78 };
-            int tempg1[5] = { 33, 38, 46, 79, 80 };
-            int tempg5[8] = { 33, 38, 46, 0, 0, 0, 0, 0 };
-            int tempg7[8] = { 11, 0, 0, 0, 0, 0, 0, 0 };
+            size_t tempg6[2] = { 11, 78 };
+            size_t tempg1[5] = { 33, 38, 46, 79, 80 };
+            size_t tempg5[8] = { 33, 38, 46, 0, 0, 0, 0, 0 };
+            size_t tempg7[8] = { 11, 0, 0, 0, 0, 0, 0, 0 };
             set_pool_3_m(13, nup_four_cg2)
         } break;
         case 9: {
-            int tempg6[2] = { 13, 81 };
-            int tempg1[5] = { 35, 41, 45, 82, 83 };
-            int tempg5[8] = { 35, 41, 45, 0, 0, 0, 0, 0 };
-            int tempg7[8] = { 13, 0, 0, 0, 0, 0, 0, 0 };
+            size_t tempg6[2] = { 13, 81 };
+            size_t tempg1[5] = { 35, 41, 45, 82, 83 };
+            size_t tempg5[8] = { 35, 41, 45, 0, 0, 0, 0, 0 };
+            size_t tempg7[8] = { 13, 0, 0, 0, 0, 0, 0, 0 };
             set_pool_3_m(13, nup_four_cg2)
         } break;
         case 10: {
-            int tempg6[2] = { 6, 7 };
-            int tempg1[5] = { 39, 40, 43, 49, 84 };
-            int tempg5[8] = { 39, 40, 43, 49, 0, 0, 0, 0 };
-            int tempg7[8] = { 6, 7, 0, 0, 0, 0, 0, 0 };
+            size_t tempg6[2] = { 6, 7 };
+            size_t tempg1[5] = { 39, 40, 43, 49, 84 };
+            size_t tempg5[8] = { 39, 40, 43, 49, 0, 0, 0, 0 };
+            size_t tempg7[8] = { 6, 7, 0, 0, 0, 0, 0, 0 };
             set_pool_3_m(13, nup_four_cg2)
         } break;
         case 11: {
-            int tempg6[2] = { 73, 76 };
-            int tempg1[5] = { 33, 36, 48, 79, 80 };
-            int tempg5[8] = { 33, 36, 48, 0, 0, 0, 0, 0 };
-            int tempg7[8] = { 0, 0, 0, 0, 0, 0, 0, 0 };
+            size_t tempg6[2] = { 73, 76 };
+            size_t tempg1[5] = { 33, 36, 48, 79, 80 };
+            size_t tempg5[8] = { 33, 36, 48, 0, 0, 0, 0, 0 };
+            size_t tempg7[8] = { 0, 0, 0, 0, 0, 0, 0, 0 };
             set_pool_3_m(14, nup_four_cg3)
         } break;
         case 12: {
-            int tempg6[2] = { 14, 85 };
-            int tempg1[5] = { 32, 37, 41, 42, 47 };
-            int tempg5[8] = { 32, 37, 41, 42, 47, 0, 0, 0 };
-            int tempg7[8] = { 14, 0, 0, 0, 0, 0, 0, 0 };
+            size_t tempg6[2] = { 14, 85 };
+            size_t tempg1[5] = { 32, 37, 41, 42, 47 };
+            size_t tempg5[8] = { 32, 37, 41, 42, 47, 0, 0, 0 };
+            size_t tempg7[8] = { 14, 0, 0, 0, 0, 0, 0, 0 };
             set_pool_3_m(14, nup_four_cg3)
         } break;
         case 13: {
-            int tempg6[2] = { 7, 12 };
-            int tempg1[5] = { 88, 46, 44, 40, 38 };
-            int tempg5[8] = { 46, 44, 40, 38, 0, 0, 0, 0 };
-            int tempg7[8] = { 7, 12, 0, 0, 0, 0, 0, 0 };
+            size_t tempg6[2] = { 7, 12 };
+            size_t tempg1[5] = { 88, 46, 44, 40, 38 };
+            size_t tempg5[8] = { 46, 44, 40, 38, 0, 0, 0, 0 };
+            size_t tempg7[8] = { 7, 12, 0, 0, 0, 0, 0, 0 };
             set_pool_3_m(15, nup_four_cg4)
         } break;
         case 14: {
-            int tempg6[2] = { 87, 8 };
-            int tempg1[5] = { 82, 83, 84, 45, 41 };
-            int tempg5[8] = { 45, 41, 0, 0, 0, 0, 0, 0 };
-            int tempg7[8] = { 8, 0, 0, 0, 0, 0, 0, 0 };
+            size_t tempg6[2] = { 87, 8 };
+            size_t tempg1[5] = { 82, 83, 84, 45, 41 };
+            size_t tempg5[8] = { 45, 41, 0, 0, 0, 0, 0, 0 };
+            size_t tempg7[8] = { 8, 0, 0, 0, 0, 0, 0, 0 };
             set_pool_3_m(15, nup_four_cg4)
         } break;
         case 15: {
-            int tempg6[2] = { 92, 10 };
-            int tempg1[5] = { 34, 39, 40, 43, 49 };
-            int tempg5[8] = { 34, 39, 40, 43, 49, 0, 0, 0 };
-            int tempg7[8] = { 10, 0, 0, 0, 0, 0, 0, 0 };
+            size_t tempg6[2] = { 92, 10 };
+            size_t tempg1[5] = { 34, 39, 40, 43, 49 };
+            size_t tempg5[8] = { 34, 39, 40, 43, 49, 0, 0, 0 };
+            size_t tempg7[8] = { 10, 0, 0, 0, 0, 0, 0, 0 };
             set_pool_3_m(15, nup_four_cg4)
         } break;
         case 16: {
-            int tempg6[2] = { 93, 13 };
-            int tempg1[5] = { 35, 37, 41, 42, 47 };
-            int tempg5[8] = { 35, 37, 41, 42, 47, 0, 0, 0 };
-            int tempg7[8] = { 13, 0, 0, 0, 0, 0, 0, 0 };
+            size_t tempg6[2] = { 93, 13 };
+            size_t tempg1[5] = { 35, 37, 41, 42, 47 };
+            size_t tempg5[8] = { 35, 37, 41, 42, 47, 0, 0, 0 };
+            size_t tempg7[8] = { 13, 0, 0, 0, 0, 0, 0, 0 };
             set_pool_3_m(15, nup_four_cg4)
         } break;
         case 17: {
-            int tempg6[2] = { 97, 75 };
-            int tempg1[5] = { 33, 38, 40, 44, 46 };
-            int tempg5[8] = { 33, 38, 40, 44, 46, 0, 0, 0 };
-            int tempg7[8] = { 0, 0, 0, 0, 0, 0, 0, 0 };
+            size_t tempg6[2] = { 97, 75 };
+            size_t tempg1[5] = { 33, 38, 40, 44, 46 };
+            size_t tempg5[8] = { 33, 38, 40, 44, 46, 0, 0, 0 };
+            size_t tempg7[8] = { 0, 0, 0, 0, 0, 0, 0, 0 };
             set_pool_3_m(16, nup_four_cg5)
         } break;
         case 18: {
-            int tempg6[2] = { 98, 77 };
-            int tempg1[5] = { 34, 39, 41, 45, 48 };
-            int tempg5[8] = { 34, 39, 41, 45, 48, 0, 0, 0 };
-            int tempg7[8] = { 0, 0, 0, 0, 0, 0, 0, 0 };
+            size_t tempg6[2] = { 98, 77 };
+            size_t tempg1[5] = { 34, 39, 41, 45, 48 };
+            size_t tempg5[8] = { 34, 39, 41, 45, 48, 0, 0, 0 };
+            size_t tempg7[8] = { 0, 0, 0, 0, 0, 0, 0, 0 };
             set_pool_3_m(16, nup_four_cg5)
         } break;
         case 19: {
-            int tempg6[2] = { 101, 73 };
-            int tempg1[5] = { 32, 36, 40, 49, 104 };
-            int tempg5[8] = { 32, 36, 40, 49, 0, 0, 0, 0 };
-            int tempg7[8] = { 0, 0, 0, 0, 0, 0, 0, 0 };
+            size_t tempg6[2] = { 101, 73 };
+            size_t tempg1[5] = { 32, 36, 40, 49, 104 };
+            size_t tempg5[8] = { 32, 36, 40, 49, 0, 0, 0, 0 };
+            size_t tempg7[8] = { 0, 0, 0, 0, 0, 0, 0, 0 };
             set_pool_3_m(17, nup_four_cg6)
         } break;
         case 20: {
-            int tempg6[2] = { 78, 81 };
-            int tempg1[5] = { 38, 42, 47, 102, 103 };
-            int tempg5[8] = { 38, 42, 47, 0, 0, 0, 0, 0 };
-            int tempg7[8] = { 0, 0, 0, 0, 0, 0, 0, 0 };
+            size_t tempg6[2] = { 78, 81 };
+            size_t tempg1[5] = { 38, 42, 47, 102, 103 };
+            size_t tempg5[8] = { 38, 42, 47, 0, 0, 0, 0, 0 };
+            size_t tempg7[8] = { 0, 0, 0, 0, 0, 0, 0, 0 };
             set_pool_3_m(17, nup_four_cg6)
         } break;
         case 21: {
-            int tempg6[2] = { 85, 87 };
-            int tempg1[5] = { 41, 43, 46, 83, 84 };
-            int tempg5[8] = { 41, 43, 46, 0, 0, 0, 0, 0 };
-            int tempg7[8] = { 0, 0, 0, 0, 0, 0, 0, 0 };
+            size_t tempg6[2] = { 85, 87 };
+            size_t tempg1[5] = { 41, 43, 46, 83, 84 };
+            size_t tempg5[8] = { 41, 43, 46, 0, 0, 0, 0, 0 };
+            size_t tempg7[8] = { 0, 0, 0, 0, 0, 0, 0, 0 };
             set_pool_3_m(18, nup_four_cg7)
         } break;
         case 22: {
-            int tempg6[2] = { 6, 107 };
-            int tempg1[5] = { 37, 40, 44, 82, 88 };
-            int tempg5[8] = { 37, 40, 44, 0, 0, 0, 0, 0 };
-            int tempg7[8] = { 6, 0, 0, 0, 0, 0, 0, 0 };
+            size_t tempg6[2] = { 6, 107 };
+            size_t tempg1[5] = { 37, 40, 44, 82, 88 };
+            size_t tempg5[8] = { 37, 40, 44, 0, 0, 0, 0, 0 };
+            size_t tempg7[8] = { 6, 0, 0, 0, 0, 0, 0, 0 };
             set_pool_3_m(18, nup_four_cg7)
         } break;
         case 23: {
-            int tempg6[2] = { 9, 110 };
-            int tempg1[5] = { 37, 40, 44, 82, 88 };
-            int tempg5[8] = { 37, 40, 44, 0, 0, 0, 0, 0 };
-            int tempg7[8] = { 9, 0, 0, 0, 0, 0, 0, 0 };
+            size_t tempg6[2] = { 9, 110 };
+            size_t tempg1[5] = { 37, 40, 44, 82, 88 };
+            size_t tempg5[8] = { 37, 40, 44, 0, 0, 0, 0, 0 };
+            size_t tempg7[8] = { 9, 0, 0, 0, 0, 0, 0, 0 };
             set_pool_3_m(19, nup_four_cg8)
         } break;
         case 24: {
-            int tempg6[2] = { 6, 107 };
-            int tempg1[5] = { 37, 40, 44, 82, 88 };
-            int tempg5[8] = { 37, 40, 44, 0, 0, 0, 0, 0 };
-            int tempg7[8] = { 6, 0, 0, 0, 0, 0, 0, 0 };
+            size_t tempg6[2] = { 6, 107 };
+            size_t tempg1[5] = { 37, 40, 44, 82, 88 };
+            size_t tempg5[8] = { 37, 40, 44, 0, 0, 0, 0, 0 };
+            size_t tempg7[8] = { 6, 0, 0, 0, 0, 0, 0, 0 };
             set_pool_3_m(19, nup_four_cg8)
         } break;
-        default: { std::cout << E_5 << endl; goto full_quit; } break;
+        default: { std::cout << E_5 << endl; goto full_quit; }
         }
     }
     else if (chosen_banner == 4) {
         switch (chosen_event) {
         case 1: {
-            int nup_four_cg31[14] = { 17, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31 };
+            size_t nup_four_cg31[14] = { 17, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31 };
             size_nup_four_c = 14;
             memmove(nup_four_c, nup_four_cg31, sizeof(nup_four_cg31));
         } break;
         case 2: {
-            int nup_four_cg32[16] = { 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31 };
+            size_t nup_four_cg32[16] = { 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31 };
             size_nup_four_c = 16;
             memmove(nup_four_c, nup_four_cg32, sizeof(nup_four_cg32));
         } break;
         case 3: {
-            int nup_four_cg33[17] = { 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31 };
+            size_t nup_four_cg33[17] = { 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31 };
             size_nup_four_c = 17;
             memmove(nup_four_c, nup_four_cg33, sizeof(nup_four_cg33));
         } break;
         case 4: {
-            int nup_four_cg34[18] = { 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 71 };
+            size_t nup_four_cg34[18] = { 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 71 };
             size_nup_four_c = 18;
             memmove(nup_four_c, nup_four_cg34, sizeof(nup_four_cg34));
         } break;
         case 5: {
-            int nup_four_cg35[19] = { 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 71, 91 };
+            size_t nup_four_cg35[19] = { 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 71, 91 };
             size_nup_four_c = 19;
             memmove(nup_four_c, nup_four_cg35, sizeof(nup_four_cg35));
         } break;
         case 6: {
-            int nup_four_cg36[20] = { 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 71, 91, 95 };
+            size_t nup_four_cg36[20] = { 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 71, 91, 95 };
             size_nup_four_c = 20;
             memmove(nup_four_c, nup_four_cg36, sizeof(nup_four_cg36));
         } break;
         case 7: {
-            int nup_four_cg37[21] = { 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 71, 91, 95, 100 };
+            size_t nup_four_cg37[21] = { 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 71, 91, 95, 100 };
             size_nup_four_c = 21;
             memmove(nup_four_c, nup_four_cg37, sizeof(nup_four_cg37));
         } break;
         case 8: {
-            int nup_four_cg38[22] = { 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 71, 91, 95, 100, 106 };
+            size_t nup_four_cg38[22] = { 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 71, 91, 95, 100, 106 };
             size_nup_four_c = 22;
             memmove(nup_four_c, nup_four_cg38, sizeof(nup_four_cg38));
         } break;
         case 9: {
-            int nup_four_cg39[23] = { 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 71, 91, 95, 100, 106, 108 };
+            size_t nup_four_cg39[23] = { 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 71, 91, 95, 100, 106, 108 };
             size_nup_four_c = 22;
             memmove(nup_four_c, nup_four_cg39, sizeof(nup_four_cg39));
         } break;
-        default: { std::cout << E_5 << endl; goto full_quit; } break;
+        default: { std::cout << E_5 << endl; goto full_quit; }
         }
     }
     else if (chosen_banner == 5) {
@@ -705,24 +710,22 @@ set_banner:
     }
     else { std::cout << E_7 << endl; goto full_quit; }
     if (y_arg) goto core_core_loop;
-    while (true) {
-        if (quit) { std::cout << E_6 << endl; goto full_quit; }
-    core_core_loop:
+    if (quit) { std::cout << E_6 << endl; goto full_quit; }
+core_core_loop:
         if (y_arg) { std::cout << S_1 << endl << S_2 << endl << S_3 << endl << S_4 << endl << endl << S_85 << endl << endl; }
-        const std::chrono::time_point<std::chrono::system_clock> startx = std::chrono::system_clock::now();
-        auto starty = std::chrono::steady_clock::now();
+        starty = std::chrono::system_clock::now();
         if (chosen_banner == 1 || chosen_banner == 2) {
             while (wishes_number > 0) {
-                unsigned long long int temp1 = generatorz() % 2;
-                int star = 0; //4-star or 5-star
-                int type = 0; //Up or non-up, character or weapon
-                int kind = 0; //which exactly
+                size_t temp1 = generatorz() % 2;
+                size_t star = 0; //4-star or 5-star
+                size_t type = 0; //Up or non-up, character or weapon
+                size_t kind = 0; //which exactly
                 if (five_star_assurance_number < 74) five_weight = 60;
                 else five_weight = 60 + 600 * (five_star_assurance_number - 73);
                 if (four_star_assurance_number < 9) four_weight = 510;
                 else four_weight = 510 + 5100 * (four_star_assurance_number - 8);
                 three_weight = 9430;
-                int weight[3] = { five_weight, four_weight, three_weight };
+                ptrdiff_t weight[3] = { five_weight, four_weight, three_weight };
                 resultt = WRSpick(weight, 3);
                 switch (resultt) {
                 case 0: {
@@ -761,7 +764,7 @@ set_banner:
                     }
                     else {
                         if (unmet4_c < 17 && unmet4_w < 17) {
-                            int weight1[2] = { 255, 255 };
+                            ptrdiff_t weight1[2] = { 255, 255 };
                             resultu = WRSpick(weight1, 2);
                             switch (resultu) {
                             case 0: {
@@ -782,7 +785,7 @@ set_banner:
                             }
                         }
                         else if (unmet4_c > 16) {
-                            int weight1[2] = { 255 + 2550 * (unmet4_c - 16), 255 };
+                            ptrdiff_t weight1[2] = { 255 + 2550 * (unmet4_c - 16), 255 };
                             resultu = WRSpick(weight1, 2);
                             switch (resultu) {
                             case 0: {
@@ -803,7 +806,7 @@ set_banner:
                             }
                         }
                         else {
-                            int weight1[2] = { 255 + 2550 * (unmet4_w - 16), 255 };
+                            ptrdiff_t weight1[2] = { 255 + 2550 * (unmet4_w - 16), 255 };
                             resultu = WRSpick(weight1, 2);
                             switch (resultu) {
                             case 0: {
@@ -829,27 +832,27 @@ set_banner:
                 default: std::cout << E_3 << endl; break;
                 }
                 output_string()
-                if (!((star == 4 && type == 1) || (star == 4 && type == 2))) unmet4_c++;
+                    if (!((star == 4 && type == 1) || (star == 4 && type == 2))) unmet4_c++;
                 if (!(star == 4 && type == 3)) unmet4_w++;
                 if (y_arg) {
                     luckget()
-                    if (star == 4 || star == 5) {
-                        for (int templuck : luckstar) {
-                            if (templuck == 5) luck += 6232;
-                            else if (templuck == 4) luck += 766;
-                            else luck += 0;
+                        if (star == 4 || star == 5) {
+                            for (size_t templuck : luckstar) {
+                                if (templuck == 5) luck += 6232;
+                                else if (templuck == 4) luck += 766;
+                                else luck += 0;
+                            }
                         }
-                    }
                     luckcpy()
                 }
             }
         }
         else if (chosen_banner == 3) {
             while (wishes_number > 0) {
-                unsigned long long int temp1 = generatorz() % 4;
-                int star = 0; //4-star or 5-star
-                int type = 0; //Up or non-up, character or weapon
-                int kind = 0; //which exactly
+                size_t temp1 = generatorz() % 4;
+                size_t star = 0; //4-star or 5-star
+                size_t type = 0; //Up or non-up, character or weapon
+                size_t kind = 0; //which exactly
                 if (five_star_assurance_number < 63) five_weight = 70;
                 else if (five_star_assurance_number < 74) five_weight = 70 + 700 * (five_star_assurance_number - 62);
                 else five_weight = 7770 + 350 * (five_star_assurance_number - 73);
@@ -857,7 +860,7 @@ set_banner:
                 else if (four_star_assurance_number == 8) four_weight = 6600;
                 else four_weight = 6600 + 3000 * (four_star_assurance_number - 8);
                 three_weight = 9330;
-                int weight[3] = { five_weight, four_weight, three_weight };
+                ptrdiff_t weight[3] = { five_weight, four_weight, three_weight };
                 resultt = WRSpick(weight, 3);
                 switch (resultt) {
                 case 0: {
@@ -922,7 +925,7 @@ set_banner:
                     }
                     else {
                         if (unmet4_c < 15 && unmet4_w < 15) {
-                            int weight2[2] = { 300, 300 };
+                            ptrdiff_t weight2[2] = { 300, 300 };
                             resultu = WRSpick(weight2, 2);
                             switch (resultu) {
                             case 0: {
@@ -943,7 +946,7 @@ set_banner:
                             }
                         }
                         else if (unmet4_c > 14) {
-                            int weight2[2] = { 300 + 3000 * (unmet4_c - 14), 300 };
+                            ptrdiff_t weight2[2] = { 300 + 3000 * (unmet4_c - 14), 300 };
                             resultu = WRSpick(weight2, 2);
                             switch (resultu) {
                             case 0: {
@@ -964,7 +967,7 @@ set_banner:
                             }
                         }
                         else {
-                            int weight2[2] = { 300 + 3000 * (unmet4_w - 14), 300 };
+                            ptrdiff_t weight2[2] = { 300 + 3000 * (unmet4_w - 14), 300 };
                             resultu = WRSpick(weight2, 2);
                             switch (resultu) {
                             case 0: {
@@ -990,32 +993,32 @@ set_banner:
                 default: std::cout << E_3 << endl; break;
                 }
                 output_string()
-                if (!((star == 4 && type == 1) || (star == 4 && type == 2))) unmet4_c++;
+                    if (!((star == 4 && type == 1) || (star == 4 && type == 2))) unmet4_c++;
                 if (!(star == 4 && type == 3)) unmet4_w++;
                 if (y_arg) {
                     luckget()
-                    if (star == 4 || star == 5) {
-                        for (int templuck : luckstar) {
-                            if (templuck == 5) luck += 5328;
-                            else if (templuck == 4) luck += 674;
-                            else luck += 0;
+                        if (star == 4 || star == 5) {
+                            for (size_t templuck : luckstar) {
+                                if (templuck == 5) luck += 5328;
+                                else if (templuck == 4) luck += 674;
+                                else luck += 0;
+                            }
                         }
-                    }
                     luckcpy()
                 }
             }
         }
         else if (chosen_banner == 4) {
             while (wishes_number > 0) {
-                int star = 0; //4-star or 5-star
-                int type = 0; //Up or non-up, character or weapon
-                int kind = 0; //which exactly
+                size_t star = 0; //4-star or 5-star
+                size_t type = 0; //Up or non-up, character or weapon
+                size_t kind = 0; //which exactly
                 if (five_star_assurance_number < 74) five_weight = 60;
                 else five_weight = 60 + 600 * (five_star_assurance_number - 73);
                 if (four_star_assurance_number < 9) four_weight = 510;
                 else four_weight = 510 + 5100 * (four_star_assurance_number - 8);
                 three_weight = 9430;
-                int weight[3] = { five_weight, four_weight, three_weight };
+                ptrdiff_t weight[3] = { five_weight, four_weight, three_weight };
                 resultt = WRSpick(weight, 3);
                 switch (resultt) {
                 case 0: {
@@ -1027,7 +1030,7 @@ set_banner:
                     five_pity[five_star_assurance_number - 1]++;
                     five_star_assurance_number = 0;
                     if (unmet5_c < 147 && unmet5_w < 147) {
-                        int weight4[2] = { 30, 30 };
+                        ptrdiff_t weight4[2] = { 30, 30 };
                         resultu = WRSpick(weight4, 2);
                         switch (resultu) {
                         case 0: {
@@ -1046,7 +1049,7 @@ set_banner:
                         }
                     }
                     else if (unmet5_c > 146) {
-                        int weight4[2] = { 30 + 300 * (unmet5_c - 146), 30 };
+                        ptrdiff_t weight4[2] = { 30 + 300 * (unmet5_c - 146), 30 };
                         resultu = WRSpick(weight4, 2);
                         switch (resultu) {
                         case 0: {
@@ -1065,7 +1068,7 @@ set_banner:
                         }
                     }
                     else {
-                        int weight4[2] = { 30 + 300 * (unmet5_w - 146), 30 };
+                        ptrdiff_t weight4[2] = { 30 + 300 * (unmet5_w - 146), 30 };
                         resultu = WRSpick(weight4, 2);
                         switch (resultu) {
                         case 0: {
@@ -1091,7 +1094,7 @@ set_banner:
                     else four_pity[10]++;
                     four_star_assurance_number = 0;
                     if (unmet4_c < 17 && unmet4_w < 17) {
-                        int weight3[2] = { 255, 255 };
+                        ptrdiff_t weight3[2] = { 255, 255 };
                         resultu = WRSpick(weight3, 2);
                         switch (resultu) {
                         case 0: {
@@ -1110,7 +1113,7 @@ set_banner:
                         }
                     }
                     else if (unmet4_c > 16) {
-                        int weight3[2] = { 255 + 2550 * (unmet4_c - 16), 255 };
+                        ptrdiff_t weight3[2] = { 255 + 2550 * (unmet4_c - 16), 255 };
                         resultu = WRSpick(weight3, 2);
                         switch (resultu) {
                         case 0: {
@@ -1129,7 +1132,7 @@ set_banner:
                         }
                     }
                     else {
-                        int weight3[2] = { 255 + 2550 * (unmet4_w - 16), 255 };
+                        ptrdiff_t weight3[2] = { 255 + 2550 * (unmet4_w - 16), 255 };
                         resultu = WRSpick(weight3, 2);
                         switch (resultu) {
                         case 0: {
@@ -1158,28 +1161,26 @@ set_banner:
                 if (!(star == 4 && type == 2)) unmet4_w++;
                 if (y_arg) {
                     luckget()
-                    if (star == 4 || star == 5) {
-                        for (int templuck : luckstar) {
-                            if (templuck == 5) luck += 6232;
-                            else if (templuck == 4) luck += 766;
-                            else luck += 0;
+                        if (star == 4 || star == 5) {
+                            for (size_t templuck : luckstar) {
+                                if (templuck == 5) luck += 6232;
+                                else if (templuck == 4) luck += 766;
+                                else luck += 0;
+                            }
                         }
-                    }
                     luckcpy()
                 }
             }
         }
         else if (chosen_banner == 5) {
             while (wishes_number > 0) {
-                unsigned long long int temp1 = generatorz() % 1000;
-                int star = 0; //4-star or 5-star
-                int type = 0; //Up or non-up, character or weapon
-                int kind = 0; //which exactly
+                size_t temp1 = generatorz() % 1000;
+                size_t star = 0; //4-star or 5-star
+                size_t kind = 0; //which exactly
                 if (is_noelle && countx == 9) {
                     star = 4;
                     four_count++;
                     four_star_assurance_number = 0;
-                    type = 1;
                     kind = 20;
                     four_count_c++;
                     is_noelle = false;
@@ -1192,7 +1193,6 @@ set_banner:
                         if (five_star_assurance_number > max_fives) { max_fives = five_star_assurance_number; max_fivesth = five_count; max_fivecount = countx; }
                         if (five_star_assurance_number < min_fives) { min_fives = five_star_assurance_number; min_fivesth = five_count; min_fivecount = countx; }
                         five_star_assurance_number = 0;
-                        type = 1;
                         five_count_c++;
                         kind = rspick(nup_five_c, 5);
                     }
@@ -1200,7 +1200,6 @@ set_banner:
                         star = 4;
                         four_count++;
                         four_star_assurance_number = 0;
-                        type = 1;
                         four_count_c++;
                         kind = rspick(nup_four_c, 11);
                         if (kind == 20) { is_noelle = false; }
@@ -1211,7 +1210,6 @@ set_banner:
                     if (temp1 < 6) {
                         star = 5;
                         five_count++;
-                        type = 1;
                         ave_fives += five_star_assurance_number;
                         if (five_star_assurance_number > max_fives) { max_fives = five_star_assurance_number; max_fivesth = five_count; max_fivecount = countx; }
                         if (five_star_assurance_number < min_fives) { min_fives = five_star_assurance_number; min_fivesth = five_count; min_fivecount = countx; }
@@ -1223,7 +1221,6 @@ set_banner:
                         star = 4;
                         four_count++;
                         four_star_assurance_number = 0;
-                        type = 1;
                         four_count_c++;
                         kind = rspick(nup_four_c, 11);
                         if (kind == 20) { is_noelle = false; }
@@ -1234,7 +1231,6 @@ set_banner:
                     if (temp1 < 6) {
                         star = 5;
                         five_count++;
-                        type = 1;
                         ave_fives += five_star_assurance_number;
                         if (five_star_assurance_number > max_fives) { max_fives = five_star_assurance_number; max_fivesth = five_count; max_fivecount = countx; }
                         if (five_star_assurance_number < min_fives) { min_fives = five_star_assurance_number; min_fivesth = five_count; min_fivecount = countx; }
@@ -1246,35 +1242,33 @@ set_banner:
                         star = 4;
                         four_count++;
                         four_star_assurance_number = 0;
-                        type = 1;
                         four_count_c++;
                         kind = rspick(nup_four_c, 11);
                         if (kind == 20) { is_noelle = false; }
                     }
                 }
                 output_string()
-                if (y_arg) {
-                    luckget()
-                        if (star == 4 || star == 5) {
-                            for (int templuck : luckstar) {
-                                if (templuck == 5) luck += 16667;
-                                else if (templuck == 4) luck += 766;
-                                else luck += 0;
+                    if (y_arg) {
+                        luckget()
+                            if (star == 4 || star == 5) {
+                                for (size_t templuck : luckstar) {
+                                    if (templuck == 5) luck += 16667;
+                                    else if (templuck == 4) luck += 766;
+                                    else luck += 0;
+                                }
                             }
-                        }
-                    luckcpy()
-                }
+                        luckcpy()
+                    }
             }
         }
         else { std::cout << E_7 << endl; goto full_quit; }
         // real work
         quit = true;
-        auto endy = std::chrono::steady_clock::now();
-        const std::chrono::time_point<std::chrono::system_clock> endx = std::chrono::system_clock::now();
-        auto elapsed = endy - starty;
-        long long int elapsed_time = std::chrono::duration_cast<std::chrono::microseconds>(elapsed).count();
-        const std::time_t t_start = std::chrono::system_clock::to_time_t(startx);
-        const std::time_t t_end = std::chrono::system_clock::to_time_t(endx);
+        endy = std::chrono::system_clock::now();
+        elapsed = endy - starty;
+        elapsed_time = std::chrono::duration_cast<std::chrono::microseconds>(elapsed).count();
+        t_start = std::chrono::system_clock::to_time_t(starty);
+        t_end = std::chrono::system_clock::to_time_t(endy);
         std::cout << endl << S_86 << t_start << endl;
         std::cout << S_87 << t_end << endl;
         std::cout << static_cast<double>(elapsed_time) * 1.0 / 1000000 << S_84 << endl;
@@ -1284,7 +1278,7 @@ set_banner:
                 << S_76 << four_count << "  " << static_cast<double>(four_count) * 100.0 / static_cast<double>(countx) << "%" << endl
                 << S_77 << five_count_c << " : " << five_count_w << " : " << four_count_c << " : " << four_count_w << endl << endl;
         }
-        else if (five_count > 0) {
+        else {
             std::cout << endl << S_73 << countx << S_74 << endl
                 << S_75 << five_count << "  " << static_cast<double>(five_count) * 100.0 / static_cast<double>(countx) << "%" << endl
                 << S_76 << four_count << "  " << static_cast<double>(four_count) * 100.0 / static_cast<double>(countx) << "%" << endl
@@ -1293,16 +1287,15 @@ set_banner:
                 << S_83 << static_cast<double>(ave_fives) * 1.0 / static_cast<double>(five_count) << endl
                 << S_77 << five_count_c << " : " << five_count_w << " : " << four_count_c << " : " << four_count_w << endl << endl;
         }
-        else { std::cout << E_8 << endl; goto full_quit; }
-        for (int iout : five_stars_c) { if (pcount[iout] > 0) std::cout << pnameshort[iout] << "(" << pcount[iout] << ") "; }
-        for (int iout : five_stars_w) { if (pcount[iout] > 0) std::cout << pnameshort[iout] << "(" << pcount[iout] << ") "; }
+        for (size_t iout : five_stars_c) { if (pcount[iout] > 0) std::cout << pnameshort[iout] << "(" << pcount[iout] << ") "; }
+        for (size_t iout : five_stars_w) { if (pcount[iout] > 0) std::cout << pnameshort[iout] << "(" << pcount[iout] << ") "; }
         if (five_count > 0) { std::cout << endl << endl; }
-        for (int iout : four_stars_c) { if (pcount[iout] > 0) std::cout << pnameshort[iout] << "(" << pcount[iout] << ") "; }
-        for (int iout : four_stars_w) { if (pcount[iout] > 0) std::cout << pnameshort[iout] << "(" << pcount[iout] << ") "; }
+        for (size_t iout : four_stars_c) { if (pcount[iout] > 0) std::cout << pnameshort[iout] << "(" << pcount[iout] << ") "; }
+        for (size_t iout : four_stars_w) { if (pcount[iout] > 0) std::cout << pnameshort[iout] << "(" << pcount[iout] << ") "; }
         std::cout << endl << endl;
         if (countx < 10) { std::cout << S_62 << endl; goto print_1; }
         std::cout << S_63 << luckiest << endl;
-        for (int templuck = 0; templuck < 10; templuck++) {
+        for (size_t templuck = 0; templuck < 10; templuck++) {
             std::cout << luckiestlocation[templuck] << "(" << luckiestsublocation[templuck] << ")(" << luckiestsubsublocation[templuck] << ") ";
             casesx(luckiestkind[templuck])
                 std::cout << pname[luckiestkind[templuck]] << endl;
@@ -1312,17 +1305,17 @@ set_banner:
         if (chosen_banner == 5 || four_count == 0 || five_count == 0) { wishes_number = 0; std::cout << S_72 << endl; goto print_2; }
         else if (chosen_banner == 1 || chosen_banner == 2 || chosen_banner == 4) {
             std::cout << S_88 << endl << endl;
-            for (int iout = 0; iout < 10; iout++) { std::cout << iout + 1 << "  " << four_pity[iout] << "   " << static_cast<double>(four_pity[iout]) * 100.0 / static_cast<double>(four_count) << "%" << endl; }
+            for (size_t iout = 0; iout < 10; iout++) { std::cout << iout + 1 << "  " << four_pity[iout] << "   " << static_cast<double>(four_pity[iout]) * 100.0 / static_cast<double>(four_count) << "%" << endl; }
             std::cout << "10+  " << four_pity[10] << "   " << static_cast<double>(four_pity[10]) * 100.0 / static_cast<double>(four_count) << "%" << endl << endl << S_89 << endl << endl;
-            for (int iout = 0; iout < 90; iout++) { std::cout << iout + 1 << "  " << five_pity[iout] << "   " << static_cast<double>(five_pity[iout]) * 100.0 / static_cast<double>(five_count) << "%" << endl; }
+            for (size_t iout = 0; iout < 90; iout++) { std::cout << iout + 1 << "  " << five_pity[iout] << "   " << static_cast<double>(five_pity[iout]) * 100.0 / static_cast<double>(five_count) << "%" << endl; }
             wishes_number = 0;
             goto print_2;
         }
         else if (chosen_banner == 3) {
             std::cout << S_88 << endl << endl;
-            for (int iout = 0; iout < 10; iout++) { std::cout << iout + 1 << "  " << four_pity[iout] << "   " << static_cast<double>(four_pity[iout]) * 100.0 / static_cast<double>(four_count) << "%" << endl; }
+            for (size_t iout = 0; iout < 10; iout++) { std::cout << iout + 1 << "  " << four_pity[iout] << "   " << static_cast<double>(four_pity[iout]) * 100.0 / static_cast<double>(four_count) << "%" << endl; }
             std::cout << "10+  " << four_pity[10] << "   " << static_cast<double>(four_pity[10]) * 100.0 / static_cast<double>(four_count) << "%" << endl << endl << S_89 << endl << endl;
-            for (int iout = 0; iout < 80; iout++) { std::cout << iout + 1 << "  " << five_pity_w[iout] << "   " << static_cast<double>(five_pity_w[iout]) * 100.0 / static_cast<double>(five_count) << "%" << endl; }
+            for (size_t iout = 0; iout < 80; iout++) { std::cout << iout + 1 << "  " << five_pity_w[iout] << "   " << static_cast<double>(five_pity_w[iout]) * 100.0 / static_cast<double>(five_count) << "%" << endl; }
             wishes_number = 0;
             goto print_2;
         }
@@ -1331,9 +1324,8 @@ set_banner:
         }
     print_2:
         if (y_arg) goto full_quit;
-        // a bunch of output of statistics
-    }
 full_quit:
+    std::cout.rdbuf(coutbuf);
     int prepause = getchar();
     prepause += 1;
     int pausex = getchar();
