@@ -1328,9 +1328,5 @@ core_core_loop:
         if (y_arg) goto full_quit;
 full_quit:
     std::cout.rdbuf(coutbuf);
-    int prepause = getchar();
-    prepause += 1;
-    int pausex = getchar();
-    pausex += 1;
-    return pausex;
+    return 0;
 }
