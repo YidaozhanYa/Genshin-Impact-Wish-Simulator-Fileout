@@ -834,8 +834,8 @@ core_core_loop:
                 default: std::cout << E_3 << endl; break;
                 }
                 output_string()
-                    if (!((star == 4 && type == 1) || (star == 4 && type == 2))) unmet4_c++;
-                if (!(star == 4 && type == 3)) unmet4_w++;
+                if (star != 4 || (type != 1 && type != 2)) unmet4_c++;
+                if (star != 4 || type != 3) unmet4_w++;
                 if (y_arg) {
                     luckget()
                         if (star == 4 || star == 5) {
@@ -995,8 +995,8 @@ core_core_loop:
                 default: std::cout << E_3 << endl; break;
                 }
                 output_string()
-                    if (!((star == 4 && type == 1) || (star == 4 && type == 2))) unmet4_c++;
-                if (!(star == 4 && type == 3)) unmet4_w++;
+                if (star != 4 || (type != 1 && type != 2)) unmet4_c++;
+                if (star != 4 || type != 3) unmet4_w++;
                 if (y_arg) {
                     luckget()
                         if (star == 4 || star == 5) {
@@ -1157,7 +1157,7 @@ core_core_loop:
                 default: std::cout << E_3 << endl; break;
                 }
                 output_string()
-                    if (!(star == 5 && type == 1)) unmet5_c++;
+                if (!(star == 5 && type == 1)) unmet5_c++;
                 if (!(star == 5 && type == 2)) unmet5_w++;
                 if (!(star == 4 && type == 1)) unmet4_c++;
                 if (!(star == 4 && type == 2)) unmet4_w++;
