@@ -135,7 +135,7 @@
 #define C_108 "红毹婵娟·云堇（岩）"
 #define C_109 "孤辰茕怀·申鹤（冰）"
 #define C_110 "长柄武器·息灾"
-#define C_111 "神里绫人（水）"
+#define C_111 "磐祭叶守·神里绫人（水）"
 #define C_112 "法器·神乐之真意"
 #define X_0 "刻晴"
 #define X_1 "莫娜"

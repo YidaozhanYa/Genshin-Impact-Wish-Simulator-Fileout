@@ -5,15 +5,8 @@
 #include <string>
 #include "cn.h" //include the language header file
 
-#define casesx( kind ){   if ((kind) < 15 ) { std::cout << "!!!!!***** "; }\
-                    else if ((kind) < 50 ) { std::cout << "!!**** "; }\
-                    else if ((kind) < 63 ) { std::cout << "*** "; }\
-                    else if ((kind) == 71 || (kind) == 79 || (kind) == 80 || (kind) == 82 || (kind) == 83 || (kind) == 84 || (kind) == 88 || (kind) == 91 || (kind) == 95 || (kind) == 100 || (kind) == 102 || (kind) == 103 || (kind) == 104 || (kind) == 106 ||(kind) == 108 ) { std::cout << "!!**** "; }\
-                    else if ((kind) < 113 ) { std::cout << "!!!!!***** "; }\
-                    else {  std::cout << E_1 << endl; goto full_quit; }\
-                } // cout stars prefix
 #define output_string() {std::cout << countx + 1 << "(" << five_star_assurance_number << ")(" << four_star_assurance_number << ") ";\
-                    casesx( kind )\
+                    casesx( kind );\
                     std::cout << pname[kind] << endl; \
                     pcount[kind]++;\
                     wishes_number--;\
@@ -219,6 +212,15 @@ static size_t WRSpick(const ptrdiff_t* weightx, size_t nom) {
     return results;
 }
 // weighted random sampling
+
+void casesx(size_t kind) {
+    if (kind < 15) { std::cout << "!!!!!***** "; }
+    else if (kind < 50) { std::cout << "!!**** "; }
+    else if (kind < 63) { std::cout << "*** "; }
+    else if (kind == 71 || kind == 79 || kind == 80 || kind == 82 || kind == 83 || kind == 84 || kind == 88 || kind == 91 || kind == 95 || kind == 100 || kind == 102 || kind == 103 || kind == 104 || kind == 106 || kind == 108) { std::cout << "!!**** "; }
+    else if (kind < 113) { std::cout << "!!!!!***** "; }
+    else { std::cout << E_1 << endl; quit = true; }
+} // cout stars prefix
 
 static void set_pool_1(size_t up_five_p, size_t size_nup_four_c_p, const size_t* tempg1, const size_t* tempg5, size_t* up_four_g, size_t* nup_four_c, const size_t* nup_four_cgm, size_t* four_check) {
     up_five = up_five_p;
@@ -464,6 +466,11 @@ set_banner:
             size_t tempg5[8] = { 18, 22, 100, 0, 0, 0, 0, 0 };
             set_pool_1_m(99, 19, nup_four_cg8)
         } break;
+        case 27: {
+            size_t tempg1[3] = { 18, 22, 100 };
+            size_t tempg5[8] = { 18, 22, 100, 0, 0, 0, 0, 0 };
+            set_pool_1_m(96, 19, nup_four_cg8)
+        } break;
         default: { std::cout << E_5 << endl; goto full_quit; }
         }
     }
@@ -483,6 +490,11 @@ set_banner:
             size_t tempg1[3] = { 24, 25, 71 };
             size_t tempg5[8] = { 24, 25, 71, 0, 0, 0, 0, 0 };
             set_pool_1_m(68, 19, nup_four_cg8)
+        } break;
+        case 4: {
+            size_t tempg1[3] = { 24, 25, 71 };
+            size_t tempg5[8] = { 24, 25, 71, 0, 0, 0, 0, 0 };
+            set_pool_1_m(94, 19, nup_four_cg8)
         } break;
         default: { std::cout << E_5 << endl; goto full_quit; }
         }
@@ -1312,7 +1324,7 @@ core_core_loop:
         std::cout << S_63 << luckiest << endl;
         for (size_t templuck = 0; templuck < 10; templuck++) {
             std::cout << luckiestlocation[templuck] << "(" << luckiestsublocation[templuck] << ")(" << luckiestsubsublocation[templuck] << ") ";
-            casesx(luckiestkind[templuck])
+            casesx(luckiestkind[templuck]);
                 std::cout << pname[luckiestkind[templuck]] << endl;
         }
     print_1:

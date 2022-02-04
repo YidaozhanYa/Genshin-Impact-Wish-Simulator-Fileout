@@ -135,7 +135,7 @@
 #define C_108 "\"Stage Lucida\" Yun Jin (Geo)"                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              
 #define C_109 "\"Lonesome Transcendence\" Shenhe (Cryo)"
 #define C_110 "Calamity Queller (Polearm)"
-#define C_111 "Kamisato Ayato (Hydro)"
+#define C_111 "\"Pillar of Fortitude\" Kamisato Ayato (Hydro)"
 #define C_112 "Kagura's Verity (Catalyst)"
 #define X_0 "Keqing"
 #define X_1 "Mona"
