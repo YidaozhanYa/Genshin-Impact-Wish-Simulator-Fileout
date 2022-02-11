@@ -213,7 +213,7 @@ static size_t WRSpick(const ptrdiff_t* weightx, size_t nom) {
 }
 // weighted random sampling
 
-void casesx(size_t kind) {
+static void casesx(size_t kind) {
     if (kind < 15) { std::cout << "!!!!!***** "; }
     else if (kind < 50) { std::cout << "!!**** "; }
     else if (kind < 63) { std::cout << "*** "; }
@@ -465,12 +465,12 @@ set_banner:
         case 26: {
             const size_t tempg1[3] = { 18, 22, 100 };
             const size_t tempg5[8] = { 18, 22, 100, 0, 0, 0, 0, 0 };
-            set_pool_1_m(99, 19, nup_four_cg8)
+            set_pool_1_m(99, 20, nup_four_cg9)
         } break;
         case 27: {
             const size_t tempg1[3] = { 18, 22, 100 };
             const size_t tempg5[8] = { 18, 22, 100, 0, 0, 0, 0, 0 };
-            set_pool_1_m(96, 19, nup_four_cg8)
+            set_pool_1_m(96, 20, nup_four_cg9)
         } break;
         default: { std::cout << E_5 << endl; goto full_quit; }
         }
@@ -495,7 +495,7 @@ set_banner:
         case 4: {
             const size_t tempg1[3] = { 24, 25, 71 };
             const size_t tempg5[8] = { 24, 25, 71, 0, 0, 0, 0, 0 };
-            set_pool_1_m(94, 19, nup_four_cg8)
+            set_pool_1_m(94, 20, nup_four_cg9)
         } break;
         default: { std::cout << E_5 << endl; goto full_quit; }
         }
@@ -672,10 +672,17 @@ set_banner:
         } break;
         case 25: {
             const size_t tempg6[2] = { 112, 77 };
-            const size_t tempg1[5] = { 33, 39, 41, 49, 79 };
-            const size_t tempg5[8] = { 33, 39, 41, 49, 0, 0, 0, 0 };
-            const size_t tempg7[8] = { 5, 0, 0, 0, 0, 0, 0, 0 };
-            set_pool_3_m(19, nup_four_cg8)
+            const size_t tempg1[5] = { 34, 36, 42, 47, 103 };
+            const size_t tempg5[8] = { 34, 36, 42, 47, 0, 0, 0, 0 };
+            const size_t tempg7[8] = { 0, 0, 0, 0, 0, 0, 0, 0 };
+            set_pool_3_m(20, nup_four_cg9)
+        } break;
+        case 26: {
+            const size_t tempg6[2] = { 112, 77 };
+            const size_t tempg1[5] = { 34, 36, 42, 47, 103 };
+            const size_t tempg5[8] = { 34, 36, 42, 47, 0, 0, 0, 0 };
+            const size_t tempg7[8] = { 0, 0, 0, 0, 0, 0, 0, 0 };
+            set_pool_3_m(20, nup_four_cg9)
         } break;
         default: { std::cout << E_5 << endl; goto full_quit; }
         }
