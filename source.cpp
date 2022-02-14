@@ -61,9 +61,9 @@
 using namespace std;
 
 std::random_device seed_gen;
-unsigned int seed_r = seed_gen() % 10000000;
-unsigned long long int seed_t = std::chrono::high_resolution_clock::now().time_since_epoch().count() * static_cast<unsigned long long int>(100000);
-size_t seed = static_cast<size_t>(seed_t) + static_cast<size_t>(seed_r);
+static unsigned int seed_r = seed_gen() % 10000000;
+static unsigned long long int seed_t = std::chrono::high_resolution_clock::now().time_since_epoch().count() * static_cast<unsigned long long int>(100000);
+static size_t seed = static_cast<size_t>(seed_t) + static_cast<size_t>(seed_r);
 std::mt19937_64 generatorz(seed);
 // random set
 
@@ -91,10 +91,15 @@ max_fivesth = 1,
 min_fivesth = 1,
 max_fivecount = 1,
 min_fivecount = 1,
-nup_five_c[32] = { 0, 1, 2, 3, 4 },
+size_nup_four_w = 18;
+std::chrono::system_clock::time_point starty = std::chrono::system_clock::now();
+std::chrono::system_clock::time_point endy = std::chrono::system_clock::now();
+std::chrono::nanoseconds elapsed = starty - endy;
+std::time_t t_start = std::chrono::system_clock::to_time_t(starty);
+std::time_t t_end = std::chrono::system_clock::to_time_t(endy);
+static size_t nup_five_c[32] = { 0, 1, 2, 3, 4 },
 nup_five_w[32] = { 5, 6, 7, 8, 9, 10, 11, 12, 13, 14 },
 nup_four_w[64] = { 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49 },
-size_nup_four_w = 18,
 three_g[13] = { 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62 },
 nup_four_cg1[11] = { 17, 19, 20, 21, 22, 23, 24, 25, 26, 28, 30 },
 nup_four_cg2[13] = { 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 28, 30 },
@@ -109,11 +114,6 @@ four_stars_c[23] = { 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29,
 four_stars_w[27] = { 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 79, 80, 82, 83, 84, 88, 102, 103, 104 },
 five_stars_c[23] = { 0, 1, 2, 3, 4, 63, 64, 65, 66, 67, 68, 69, 70, 72, 86, 89, 90, 94, 96, 99, 105, 109, 111 },
 five_stars_w[27] = { 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 73, 74, 75, 76, 77, 78, 81, 85, 87, 92, 93, 97, 98, 101, 107, 110, 112 };
-std::chrono::system_clock::time_point starty = std::chrono::system_clock::now();
-std::chrono::system_clock::time_point endy = std::chrono::system_clock::now();
-std::chrono::nanoseconds elapsed = starty - endy;
-std::time_t t_start = std::chrono::system_clock::to_time_t(starty);
-std::time_t t_end = std::chrono::system_clock::to_time_t(endy);
 ptrdiff_t chosen_event = 0,
 chosen_banner = 0,
 unmet4_c = 0,
@@ -131,7 +131,7 @@ fate_weapon = 0;
 signed long long int  wishes_number = 0;
 auto elapsed_time = std::chrono::duration_cast<std::chrono::microseconds>(elapsed).count();
 
-const char* pname[128] = { C_0, C_1, C_2, C_3, C_4, C_5, C_6, C_7, C_8, C_9, C_10, C_11, C_12, C_13, C_14, C_15, C_16, C_17, C_18, C_19, C_20,
+static const char* pname[128] = { C_0, C_1, C_2, C_3, C_4, C_5, C_6, C_7, C_8, C_9, C_10, C_11, C_12, C_13, C_14, C_15, C_16, C_17, C_18, C_19, C_20,
                 C_21, C_22, C_23, C_24, C_25, C_26, C_27, C_28, C_29, C_30, C_31, C_32, C_33, C_34, C_35, C_36, C_37, C_38, C_39, C_40,
                 C_41, C_42, C_43, C_44, C_45, C_46, C_47, C_48, C_49, C_50, C_51, C_52, C_53, C_54, C_55, C_56, C_57, C_58, C_59, C_60,
                 C_61, C_62, C_63, C_64, C_65, C_66, C_67, C_68, C_69, C_70, C_71, C_72, C_73, C_74, C_75, C_76, C_77, C_78, C_79, C_80,
@@ -153,7 +153,7 @@ const char* pname[128] = { C_0, C_1, C_2, C_3, C_4, C_5, C_6, C_7, C_8, C_9, C_1
                 "Placeholder",
                 "Placeholder",
 };
-const char* pnameshort[128] = { X_0, X_1, X_2, X_3, X_4, X_5, X_6, X_7, X_8, X_9, X_10, X_11, X_12, X_13, X_14, X_15, X_16, X_17, X_18, X_19, X_20,
+static const char* pnameshort[128] = { X_0, X_1, X_2, X_3, X_4, X_5, X_6, X_7, X_8, X_9, X_10, X_11, X_12, X_13, X_14, X_15, X_16, X_17, X_18, X_19, X_20,
                 X_21, X_22, X_23, X_24, X_25, X_26, X_27, X_28, X_29, X_30, X_31, X_32, X_33, X_34, X_35, X_36, X_37, X_38, X_39, X_40,
                 X_41, X_42, X_43, X_44, X_45, X_46, X_47, X_48, X_49, X_50, X_51, X_52, X_53, X_54, X_55, X_56, X_57, X_58, X_59, X_60,
                 X_61, X_62, X_63, X_64, X_65, X_66, X_67, X_68, X_69, X_70, X_71, X_72, X_73, X_74, X_75, X_76, X_77, X_78, X_79, X_80,
@@ -246,42 +246,42 @@ int main(int argc, char* argv[]) {
     static char default_argv0[] = "giwscli";
     if (!argv[0] || !argv[0][0])
         argv[0] = default_argv0;
-    quit = true,
-    is_noelle = true,
-    five_star_guarantee_number = false,
-    four_star_guarantee_number = false,
-    chosen_banner = 0,
-    chosen_event = 0,
-    four_star_assurance_number = 1,
-    five_star_assurance_number = 1,
-    max_fives = 1,
-    min_fives = PTRDIFF_MAX,
-    fate_weapon = 0,
-    fate_points = 0,
-    five_weight = 0,
-    four_weight = 0,
-    three_weight = 0,
-    unmet4_c = 0,
-    unmet4_w = 0,
-    unmet5_c = 0,
-    unmet5_w = 0,
-    resultt = 0,
-    resultu = 0,
-    luck = 0,
-    luckiest = 0,
-    size_nup_four_w = 18,
-    countx = 0,
-    wishes_number = 0,
-    five_count = 0,
-    five_count_c = 0,
-    five_count_w = 0,
-    four_count = 0,
-    four_count_c = 0,
-    four_count_w = 0,
-    ave_fives = 0,
-    max_fivesth = 1,
-    min_fivesth = 1,
-    max_fivecount = 1,
+    quit = true;
+    is_noelle = true;
+    five_star_guarantee_number = false;
+    four_star_guarantee_number = false;
+    chosen_banner = 0;
+    chosen_event = 0;
+    four_star_assurance_number = 1;
+    five_star_assurance_number = 1;
+    max_fives = 1;
+    min_fives = PTRDIFF_MAX;
+    fate_weapon = 0;
+    fate_points = 0;
+    five_weight = 0;
+    four_weight = 0;
+    three_weight = 0;
+    unmet4_c = 0;
+    unmet4_w = 0;
+    unmet5_c = 0;
+    unmet5_w = 0;
+    resultt = 0;
+    resultu = 0;
+    luck = 0;
+    luckiest = 0;
+    size_nup_four_w = 18;
+    countx = 0;
+    wishes_number = 0;
+    five_count = 0;
+    five_count_c = 0;
+    five_count_w = 0;
+    four_count = 0;
+    four_count_c = 0;
+    four_count_w = 0;
+    ave_fives = 0;
+    max_fivesth = 1;
+    min_fivesth = 1;
+    max_fivecount = 1;
     min_fivecount = 1;
     size_t up_five_g[32] = { 0 },
         up_four_g[64] = { 0 },
@@ -679,7 +679,7 @@ set_banner:
         } break;
         case 26: {
             const size_t tempg6[2] = { 112, 77 };
-            const size_t tempg1[5] = { 34, 36, 42, 47, 103 };
+            const size_t tempg1[5] = { 34, 36, 42, 47, 104 };
             const size_t tempg5[8] = { 34, 36, 42, 47, 0, 0, 0, 0 };
             const size_t tempg7[8] = { 0, 0, 0, 0, 0, 0, 0, 0 };
             set_pool_3_m(20, nup_four_cg9)
