@@ -7,23 +7,14 @@
 
 #define output_string() {std::cout << countx + 1 << "(" << five_star_assurance_number << ")(" << four_star_assurance_number << ") ";\
                     casesx( kind );\
-                    std::cout << pname[kind] << endl; \
+                    std::cout << pname[kind] << "\n"; \
                     pcount[kind]++;\
                     wishes_number--;\
                     countx++;\
                     five_star_assurance_number++;\
                     four_star_assurance_number++;\
                     } // cout what have come home
-#define luckcpy() {if (countx == 10) {\
-                        luckiest = luck;\
-                        for (size_t templuck = 0; templuck < 10; templuck++) {\
-                            luckiestlocation[templuck] = lucklocation[templuck];\
-                            luckiestsublocation[templuck] = lucksublocation[templuck];\
-                            luckiestsubsublocation[templuck] = lucksubsublocation[templuck];\
-                            luckiestkind[templuck] = luckkind[templuck];\
-                        }\
-                    }\
-                    if (luck > luckiest) {\
+#define luckcpy() {if ( luck > luckiest || countx < 11) {\
                         luckiest = luck;\
                         for (size_t templuck = 0; templuck < 10; templuck++) {\
                             luckiestlocation[templuck] = lucklocation[templuck];\
@@ -311,7 +302,7 @@ int main(int argc, char* argv[]) {
             test2 = stoll(argv[3]);
         }
         catch (...) {
-            std::cout << E_11 << endl;
+            std::cout << E_11 << "\n";
             y_arg = true;
             goto full_quit;
         }
@@ -320,7 +311,7 @@ int main(int argc, char* argv[]) {
         wishes_number = stoll(argv[3]);
         if (wishes_number < 1) {
             wishes_number = 0;
-            std::cout << S_72 << endl;
+            std::cout << S_72 << "\n";
             y_arg = true;
             goto full_quit;
         }
@@ -329,7 +320,7 @@ int main(int argc, char* argv[]) {
         goto set_banner;
     }
     else {
-        std::cout << E_11 << endl;
+        std::cout << E_11 << "\n";
         y_arg = true;
         goto full_quit;
     }
@@ -472,7 +463,7 @@ set_banner:
             const size_t tempg5[8] = { 18, 22, 100, 0, 0, 0, 0, 0 };
             set_pool_1_m(96, 20, nup_four_cg9)
         } break;
-        default: { std::cout << E_5 << endl; goto full_quit; }
+        default: { std::cout << E_5 << "\n"; goto full_quit; }
         }
     }
     else if (chosen_banner == 2) {
@@ -497,7 +488,7 @@ set_banner:
             const size_t tempg5[8] = { 24, 25, 71, 0, 0, 0, 0, 0 };
             set_pool_1_m(94, 20, nup_four_cg9)
         } break;
-        default: { std::cout << E_5 << endl; goto full_quit; }
+        default: { std::cout << E_5 << "\n"; goto full_quit; }
         }
     }
     else if (chosen_banner == 3) {
@@ -684,7 +675,7 @@ set_banner:
             const size_t tempg7[8] = { 0, 0, 0, 0, 0, 0, 0, 0 };
             set_pool_3_m(20, nup_four_cg9)
         } break;
-        default: { std::cout << E_5 << endl; goto full_quit; }
+        default: { std::cout << E_5 << "\n"; goto full_quit; }
         }
     }
     else if (chosen_banner == 4) {
@@ -734,7 +725,7 @@ set_banner:
             size_nup_four_c = 22;
             for (size_t i = 0; i < 23; i++) { nup_four_c[i] = nup_four_cg39[i]; }
         } break;
-        default: { std::cout << E_5 << endl; goto full_quit; }
+        default: { std::cout << E_5 << "\n"; goto full_quit; }
         }
     }
     else if (chosen_banner == 5) {
@@ -742,11 +733,11 @@ set_banner:
             nup_four_c[i] = nup_four_cg1[i];
         }
     }
-    else { std::cout << E_7 << endl; goto full_quit; }
+    else { std::cout << E_7 << "\n"; goto full_quit; }
     if (y_arg) goto core_core_loop;
-    if (quit) { std::cout << E_6 << endl; goto full_quit; }
+    if (quit) { std::cout << E_6 << "\n"; goto full_quit; }
 core_core_loop:
-        if (y_arg) { std::cout << S_1 << endl << S_2 << endl << S_3 << endl << S_4 << endl << endl << S_85 << endl << endl; }
+        if (y_arg) { std::cout << S_1 << "\n" << S_2 << "\n" << S_3 << "\n" << S_4 << "\n\n" << S_85 << "\n\n"; }
         starty = std::chrono::system_clock::now();
         if (chosen_banner == 1 || chosen_banner == 2) {
             while (wishes_number > 0) {
@@ -815,7 +806,7 @@ core_core_loop:
                                 kind = rspick(nup_four_w, size_nup_four_w);
                                 four_star_guarantee_number = true;
                             } break;
-                            default: std::cout << E_4 << endl; break;
+                            default: std::cout << E_4 << "\n"; break;
                             }
                         }
                         else if (unmet4_c > 16) {
@@ -836,7 +827,7 @@ core_core_loop:
                                 kind = rspick(nup_four_w, size_nup_four_w);
                                 four_star_guarantee_number = true;
                             } break;
-                            default: std::cout << E_4 << endl; break;
+                            default: std::cout << E_4 << "\n"; break;
                             }
                         }
                         else {
@@ -857,13 +848,13 @@ core_core_loop:
                                 kind = rspick(nup_four_c, size_nup_four_c);
                                 if ((kind == four_check[0] || kind == four_check[1] || kind == four_check[2] || kind == four_check[3] || kind == four_check[4] || kind == four_check[5] || kind == four_check[6] || kind == four_check[7])) four_star_guarantee_number = false; else four_star_guarantee_number = true;
                             } break;
-                            default: std::cout << E_4 << endl; break;
+                            default: std::cout << E_4 << "\n"; break;
                             }
                         }
                     }
                 } break;
                 case 2: Tri() break;
-                default: std::cout << E_3 << endl; break;
+                default: std::cout << E_3 << "\n"; break;
                 }
                 output_string()
                 if (star != 4 || type == 3) unmet4_c++;
@@ -942,7 +933,7 @@ core_core_loop:
                             if ((kind == five_check[0] || kind == five_check[1] || kind == five_check[2] || kind == five_check[3] || kind == five_check[4] || kind == five_check[5] || kind == five_check[6] || kind == five_check[7])) five_star_guarantee_number = false; else five_star_guarantee_number = true;
                         }
                     }
-                    else { std::cout << E_2 << endl; goto full_quit; }
+                    else { std::cout << E_2 << "\n"; goto full_quit; }
                 } break;
                 case 1: {
                     star = 4;
@@ -976,7 +967,7 @@ core_core_loop:
                                 kind = rspick(nup_four_w, size_nup_four_w);
                                 if ((kind == four_check[0] || kind == four_check[1] || kind == four_check[2] || kind == four_check[3] || kind == four_check[4] || kind == four_check[5] || kind == four_check[6] || kind == four_check[7])) four_star_guarantee_number = false; else four_star_guarantee_number = true;
                             } break;
-                            default: std::cout << E_4 << endl; break;
+                            default: std::cout << E_4 << "\n"; break;
                             }
                         }
                         else if (unmet4_c > 14) {
@@ -997,7 +988,7 @@ core_core_loop:
                                 kind = rspick(nup_four_w, size_nup_four_w);
                                 if ((kind == four_check[0] || kind == four_check[1] || kind == four_check[2] || kind == four_check[3] || kind == four_check[4] || kind == four_check[5] || kind == four_check[6] || kind == four_check[7])) four_star_guarantee_number = false; else four_star_guarantee_number = true;
                             } break;
-                            default: std::cout << E_4 << endl; break;
+                            default: std::cout << E_4 << "\n"; break;
                             }
                         }
                         else {
@@ -1018,13 +1009,13 @@ core_core_loop:
                                 kind = rspick(nup_four_c, size_nup_four_c);
                                 four_star_guarantee_number = true;
                             } break;
-                            default: std::cout << E_4 << endl; break;
+                            default: std::cout << E_4 << "\n"; break;
                             }
                         }
                     }
                 } break;
                 case 2: Tri() break;
-                default: std::cout << E_3 << endl; break;
+                default: std::cout << E_3 << "\n"; break;
                 }
                 output_string()
                 if (star != 4 || type == 3) unmet4_c++;
@@ -1079,7 +1070,7 @@ core_core_loop:
                             unmet5_w = 0;
                             kind = rspick(nup_five_w, 10);
                         } break;
-                        default: std::cout << E_4 << endl; break;
+                        default: std::cout << E_4 << "\n"; break;
                         }
                     }
                     else if (unmet5_c > 146) {
@@ -1098,7 +1089,7 @@ core_core_loop:
                             unmet5_w = 0;
                             kind = rspick(nup_five_w, 10);
                         } break;
-                        default: std::cout << E_4 << endl; break;
+                        default: std::cout << E_4 << "\n"; break;
                         }
                     }
                     else {
@@ -1117,7 +1108,7 @@ core_core_loop:
                             unmet5_c = 0;
                             kind = rspick(nup_five_c, 5);
                         } break;
-                        default: std::cout << E_4 << endl; break;
+                        default: std::cout << E_4 << "\n"; break;
                         }
                     }
                 } break;
@@ -1143,7 +1134,7 @@ core_core_loop:
                             unmet4_w = 0;
                             kind = rspick(nup_four_w, size_nup_four_w);
                         } break;
-                        default: std::cout << E_4 << endl; break;
+                        default: std::cout << E_4 << "\n"; break;
                         }
                     }
                     else if (unmet4_c > 16) {
@@ -1162,7 +1153,7 @@ core_core_loop:
                             unmet4_w = 0;
                             kind = rspick(nup_four_w, size_nup_four_w);
                         } break;
-                        default: std::cout << E_4 << endl; break;
+                        default: std::cout << E_4 << "\n"; break;
                         }
                     }
                     else {
@@ -1181,12 +1172,12 @@ core_core_loop:
                             unmet4_c = 0;
                             kind = rspick(nup_four_c, size_nup_four_c);
                         } break;
-                        default: std::cout << E_4 << endl; break;
+                        default: std::cout << E_4 << "\n"; break;
                         }
                     }
                 } break;
                 case 2: Tri() break;
-                default: std::cout << E_3 << endl; break;
+                default: std::cout << E_3 << "\n"; break;
                 }
                 output_string()
                 if (!(star == 5 && type == 1)) unmet5_c++;
@@ -1295,7 +1286,7 @@ core_core_loop:
                     }
             }
         }
-        else { std::cout << E_7 << endl; goto full_quit; }
+        else { std::cout << E_7 << "\n"; goto full_quit; }
         // real work
         quit = true;
         endy = std::chrono::system_clock::now();
@@ -1303,58 +1294,58 @@ core_core_loop:
         elapsed_time = std::chrono::duration_cast<std::chrono::microseconds>(elapsed).count();
         t_start = std::chrono::system_clock::to_time_t(starty);
         t_end = std::chrono::system_clock::to_time_t(endy);
-        std::cout << endl << S_86 << t_start << endl;
-        std::cout << S_87 << t_end << endl;
-        std::cout << static_cast<double>(elapsed_time) * 1.0 / 1000000 << S_84 << endl;
+        std::cout << "\n" << S_86 << t_start << "\n";
+        std::cout << S_87 << t_end << "\n";
+        std::cout << static_cast<double>(elapsed_time) * 1.0 / 1000000 << S_84 << "\n";
         if (five_count == 0) {
-            std::cout << endl << S_73 << countx << S_74 << endl
-                << S_75 << five_count << "  " << static_cast<double>(five_count) * 100.0 / static_cast<double>(countx) << "%" << endl
-                << S_76 << four_count << "  " << static_cast<double>(four_count) * 100.0 / static_cast<double>(countx) << "%" << endl
-                << S_77 << five_count_c << " : " << five_count_w << " : " << four_count_c << " : " << four_count_w << endl << endl;
+            std::cout << "\n" << S_73 << countx << S_74 << "\n"
+                << S_75 << five_count << "  " << static_cast<double>(five_count) * 100.0 / static_cast<double>(countx) << "%\n"
+                << S_76 << four_count << "  " << static_cast<double>(four_count) * 100.0 / static_cast<double>(countx) << "%\n"
+                << S_77 << five_count_c << " : " << five_count_w << " : " << four_count_c << " : " << four_count_w << "\n\n";
         }
         else {
-            std::cout << endl << S_73 << countx << S_74 << endl
-                << S_75 << five_count << "  " << static_cast<double>(five_count) * 100.0 / static_cast<double>(countx) << "%" << endl
-                << S_76 << four_count << "  " << static_cast<double>(four_count) * 100.0 / static_cast<double>(countx) << "%" << endl
-                << S_78 << max_fives << S_79 << max_fivesth << S_80 << max_fivecount + 1 << S_81 << endl
-                << S_82 << min_fives << S_79 << min_fivesth << S_80 << min_fivecount + 1 << S_81 << endl
-                << S_83 << static_cast<double>(ave_fives) * 1.0 / static_cast<double>(five_count) << endl
-                << S_77 << five_count_c << " : " << five_count_w << " : " << four_count_c << " : " << four_count_w << endl << endl;
+            std::cout << "\n" << S_73 << countx << S_74 << "\n"
+                << S_75 << five_count << "  " << static_cast<double>(five_count) * 100.0 / static_cast<double>(countx) << "%\n"
+                << S_76 << four_count << "  " << static_cast<double>(four_count) * 100.0 / static_cast<double>(countx) << "%\n"
+                << S_78 << max_fives << S_79 << max_fivesth << S_80 << max_fivecount + 1 << S_81 << "\n"
+                << S_82 << min_fives << S_79 << min_fivesth << S_80 << min_fivecount + 1 << S_81 << "\n"
+                << S_83 << static_cast<double>(ave_fives) * 1.0 / static_cast<double>(five_count) << "\n"
+                << S_77 << five_count_c << " : " << five_count_w << " : " << four_count_c << " : " << four_count_w << "\n\n";
         }
         for (const size_t iout : five_stars_c) { if (pcount[iout] > 0) std::cout << pnameshort[iout] << "(" << pcount[iout] << ") "; }
         for (const size_t iout : five_stars_w) { if (pcount[iout] > 0) std::cout << pnameshort[iout] << "(" << pcount[iout] << ") "; }
-        if (five_count > 0) { std::cout << endl << endl; }
+        if (five_count > 0) { std::cout << "\n\n"; }
         for (const size_t iout : four_stars_c) { if (pcount[iout] > 0) std::cout << pnameshort[iout] << "(" << pcount[iout] << ") "; }
         for (const size_t iout : four_stars_w) { if (pcount[iout] > 0) std::cout << pnameshort[iout] << "(" << pcount[iout] << ") "; }
-        std::cout << endl << endl;
-        if (countx < 10) { std::cout << S_62 << endl; goto print_1; }
-        std::cout << S_63 << luckiest << endl;
+        std::cout << "\n\n";
+        if (countx < 10) { std::cout << S_62 << "\n"; goto print_1; }
+        std::cout << S_63 << luckiest << "\n";
         for (size_t templuck = 0; templuck < 10; templuck++) {
             std::cout << luckiestlocation[templuck] << "(" << luckiestsublocation[templuck] << ")(" << luckiestsubsublocation[templuck] << ") ";
             casesx(luckiestkind[templuck]);
-                std::cout << pname[luckiestkind[templuck]] << endl;
+                std::cout << pname[luckiestkind[templuck]] << "\n";
         }
     print_1:
-        std::cout << endl;
-        if (chosen_banner == 5 || four_count == 0 || five_count == 0) { wishes_number = 0; std::cout << S_72 << endl; goto print_2; }
+        std::cout << "\n";
+        if (chosen_banner == 5 || four_count == 0 || five_count == 0) { wishes_number = 0; std::cout << S_72 << "\n"; goto print_2; }
         else if (chosen_banner == 1 || chosen_banner == 2 || chosen_banner == 4) {
-            std::cout << S_88 << endl << endl;
-            for (size_t iout = 0; iout < 10; iout++) { std::cout << iout + 1 << "  " << four_pity[iout] << "   " << static_cast<double>(four_pity[iout]) * 100.0 / static_cast<double>(four_count) << "%" << endl; }
-            std::cout << "10+  " << four_pity[10] << "   " << static_cast<double>(four_pity[10]) * 100.0 / static_cast<double>(four_count) << "%" << endl << endl << S_89 << endl << endl;
-            for (size_t iout = 0; iout < 90; iout++) { std::cout << fixed << iout + 1 << "  " << five_pity[iout] << "   " << static_cast<double>(five_pity[iout]) * 100.0 / static_cast<double>(five_count) << "%" << endl; }
+            std::cout << S_88 << "\n\n";
+            for (size_t iout = 0; iout < 10; iout++) { std::cout << iout + 1 << "  " << four_pity[iout] << "   " << static_cast<double>(four_pity[iout]) * 100.0 / static_cast<double>(four_count) << "%\n"; }
+            std::cout << "10+  " << four_pity[10] << "   " << static_cast<double>(four_pity[10]) * 100.0 / static_cast<double>(four_count) << "%\n\n" << S_89 << "\n\n";
+            for (size_t iout = 0; iout < 90; iout++) { std::cout << fixed << iout + 1 << "  " << five_pity[iout] << "   " << static_cast<double>(five_pity[iout]) * 100.0 / static_cast<double>(five_count) << "%\n"; }
             wishes_number = 0;
             goto print_2;
         }
         else if (chosen_banner == 3) {
-            std::cout << S_88 << endl << endl;
-            for (size_t iout = 0; iout < 10; iout++) { std::cout << iout + 1 << "  " << four_pity[iout] << "   " << static_cast<double>(four_pity[iout]) * 100.0 / static_cast<double>(four_count) << "%" << endl; }
-            std::cout << "10+  " << four_pity[10] << "   " << static_cast<double>(four_pity[10]) * 100.0 / static_cast<double>(four_count) << "%" << endl << endl << S_89 << endl << endl;
-            for (size_t iout = 0; iout < 80; iout++) { std::cout << fixed << iout + 1 << "  " << five_pity_w[iout] << "   " << static_cast<double>(five_pity_w[iout]) * 100.0 / static_cast<double>(five_count) << "%" << endl; }
+            std::cout << S_88 << "\n\n";
+            for (size_t iout = 0; iout < 10; iout++) { std::cout << iout + 1 << "  " << four_pity[iout] << "   " << static_cast<double>(four_pity[iout]) * 100.0 / static_cast<double>(four_count) << "%\n"; }
+            std::cout << "10+  " << four_pity[10] << "   " << static_cast<double>(four_pity[10]) * 100.0 / static_cast<double>(four_count) << "%\n\n" << S_89 << "\n\n";
+            for (size_t iout = 0; iout < 80; iout++) { std::cout << fixed << iout + 1 << "  " << five_pity_w[iout] << "   " << static_cast<double>(five_pity_w[iout]) * 100.0 / static_cast<double>(five_count) << "%\n"; }
             wishes_number = 0;
             goto print_2;
         }
         else {
-            wishes_number = 0; std::cout << E_7 << endl; goto full_quit;
+            wishes_number = 0; std::cout << E_7 << "\n"; goto full_quit;
         }
     print_2:
         if (y_arg) goto full_quit;
