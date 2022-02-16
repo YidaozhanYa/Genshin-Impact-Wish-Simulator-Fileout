@@ -306,6 +306,9 @@ int main(int argc, char* argv[]) {
             y_arg = true;
             goto full_quit;
         }
+        test0 = 1 + test1;
+        test1 = 1 + test0;
+        test2 = 1 + test2;
         chosen_banner = stoi(argv[1]);
         chosen_event = stoi(argv[2]);
         wishes_number = stoll(argv[3]);
