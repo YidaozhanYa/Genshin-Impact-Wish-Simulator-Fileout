@@ -274,9 +274,9 @@ int main(int argc, char* argv[]) {
     min_fivesth = 1;
     max_fivecount = 1;
     min_fivecount = 1;
-    size_t up_five_g[32] = { 0 },
-        up_four_g[64] = { 0 },
-        nup_four_c[64] = { 0 },
+    size_t up_five_g[2] = { 0 },
+        up_four_g[16] = { 0 },
+        nup_four_c[32] = { 0 },
         luckkind[10] = { 127, 127, 127, 127, 127, 127, 127, 127, 127, 127 },
         luckstar[10] = { 3, 3, 3, 3, 3, 3, 3, 3, 3, 3 },
         luckiestkind[10] = { 127, 127, 127, 127, 127, 127, 127, 127, 127, 127 },
