@@ -165,27 +165,28 @@ static const char* pnameshort[128] = { X_0, X_1, X_2, X_3, X_4, X_5, X_6, X_7, X
 // names of the items
 
 static size_t rspick(const size_t* kindx, size_t sizekind) {
-    size_t kindout = kindx[1];
-    size_t index = 0;
-    size_t temp121 = 0;
-    for (; index < sizekind; index++)
+    size_t kindout = kindx[0];
+    size_t index = 1;
+    unsigned int temp121 = 0;
+    for (; index < sizekind; ++index)
     {
-        temp121 = generatorz() % (static_cast<unsigned long long int>(index) + 1);
-        if (temp121 < 1) kindout = kindx[index];
+        temp121 = generatorz() % static_cast<unsigned int>((static_cast<unsigned long long int>(index) + 1));
+        if (temp121 == 0) kindout = kindx[index];
     }
     return kindout;
 }
 // randomly pick an element among kindx which size is sizekind
 
-static size_t WRSpick(const ptrdiff_t* weightx, size_t nom) {
+static size_t WRSpick(const ptrdiff_t* weightx, unsigned int nom) {
     ptrdiff_t ceilling = 1;
-    for (size_t inin = 0; inin < nom; inin++) ceilling += weightx[inin];
+    for (unsigned int inin = 0; inin < nom; inin++) ceilling += weightx[inin];
     const size_t typess1[3] = { 0, 1, 2 };
     const size_t typess2[2] = { 0, 1 };
     if (nom == 3 && ceilling > 10000) ceilling = 10000;
     ptrdiff_t randomn = static_cast<ptrdiff_t> (generatorz() % static_cast<size_t>(ceilling));
-    size_t tc = 0, results = 0;
-    for (size_t inin = 0; inin < nom; inin++) {
+    unsigned int tc = 0;
+    size_t results = 0;
+    for (unsigned int inin = 0; inin < nom; inin++) {
         if (randomn < weightx[inin]) {
             if (nom == 3) results = typess1[tc];
             else results = typess2[tc];
