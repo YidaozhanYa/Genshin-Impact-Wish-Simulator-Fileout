@@ -16,4 +16,5 @@ jobs:
       - uses: ncipollo/release-action@v1
         with:
           artifacts: "giwsfo"
+          tag: "actions-build"
           token: ${{ secrets.GITHUB_TOKEN }}
