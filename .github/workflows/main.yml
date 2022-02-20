@@ -1,0 +1,19 @@
+name: ActionsBuilder
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v2
+
+      - name: build
+        run: g++ -s -o3 source.cpp -o giwsfo
+      - uses: ncipollo/release-action@v1
+        with:
+          artifacts: "giwsfo"
+          token: ${{ secrets.GITHUB_TOKEN }}
