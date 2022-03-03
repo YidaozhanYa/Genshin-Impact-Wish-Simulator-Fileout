@@ -1,6 +1,6 @@
 ﻿#pragma once
 #ifndef CN_H
-#define S_1 "原神祈愿模拟器（无窗口）V2.5.4"
+#define S_1 "原神祈愿模拟器（无窗口）V2.5.11"
 #define S_2 "作者: Jirehlov Research"
 #define S_3 "开源于GitHub: Jirehlov_Genshin-Impact-Wish-Simulator-Fileout"
 #define S_4 "GPL-3.0 License"
@@ -252,8 +252,8 @@
 #define X_110 "息灾"
 #define X_111 "神里绫人"
 #define X_112 "神乐之真意"
-#define X_113 "Haran Tsukishiro Futsu"
-#define X_114 "Yelan"
+#define X_113 "波乱月白经津"
+#define X_114 "夜阑"
 #define E_1 "kind 不合理! 错误码: 1"
 #define E_2 "fate_weapon 不合理! 错误码: 2"
 #define E_3 "resultt 不合理! 错误码: 3"
