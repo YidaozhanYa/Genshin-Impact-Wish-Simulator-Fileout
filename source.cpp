@@ -2,6 +2,7 @@
 #include <iostream>
 #include <fstream>
 #include <random>
+#include <iomanip>
 #include <string>
 #include "cn.h" //include the language header file
 
@@ -43,11 +44,11 @@
                 kind = rspick(three_g, 13);\
                 } // 3-star kind settler for all banners
 #define set_pool_1_m(up_five_m,size_nup_four_c_m, nup_four_cgm) {\
-                    set_pool_1((up_five_m), (size_nup_four_c_m), tempg1, tempg5, up_four_g, nup_four_c, (nup_four_cgm), four_check);\
-                }
+					set_pool_1((up_five_m), (size_nup_four_c_m), tempg1, tempg5, (nup_four_cgm));\
+				}
 #define set_pool_3_m(size_nup_four_c_m, nup_four_cgm) {\
-                    set_pool_3(up_five_g, (size_nup_four_c_m), tempg1, tempg5, tempg6, tempg7, up_four_g, nup_four_c, (nup_four_cgm), four_check, five_check);\
-                }
+					set_pool_3((size_nup_four_c_m), tempg1, tempg5, tempg6, tempg7, (nup_four_cgm));\
+				}
 
 using namespace std;
 
@@ -80,7 +81,8 @@ max_fivesth = 1,
 min_fivesth = 1,
 max_fivecount = 1,
 min_fivecount = 1,
-size_nup_four_w = 18;
+size_nup_four_w = 18,
+one_to_ten[10] = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
 std::chrono::system_clock::time_point starty = std::chrono::system_clock::now();
 std::chrono::system_clock::time_point endy = std::chrono::system_clock::now();
 std::chrono::nanoseconds elapsed = starty - endy;
@@ -102,7 +104,25 @@ nup_four_cg9[20] = { 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 28, 30, 71,
 four_stars_c[23] = { 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 71, 91, 95, 100, 106, 108 },
 four_stars_w[27] = { 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 79, 80, 82, 83, 84, 88, 102, 103, 104 },
 five_stars_c[23] = { 0, 1, 2, 3, 4, 63, 64, 65, 66, 67, 68, 69, 70, 72, 86, 89, 90, 94, 96, 99, 105, 109, 111 },
-five_stars_w[28] = { 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 73, 74, 75, 76, 77, 78, 81, 85, 87, 92, 93, 97, 98, 101, 107, 110, 112, 113 }; 
+five_stars_w[28] = { 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 73, 74, 75, 76, 77, 78, 81, 85, 87, 92, 93, 97, 98, 101, 107, 110, 112, 113 },
+up_five_g[2] = { 0 },
+up_four_g[16] = { 0 },
+nup_four_c[32] = { 0 },
+luckkind[10] = { 127, 127, 127, 127, 127, 127, 127, 127, 127, 127 },
+luckstar[10] = { 3, 3, 3, 3, 3, 3, 3, 3, 3, 3 },
+luckiestkind[10] = { 127, 127, 127, 127, 127, 127, 127, 127, 127, 127 },
+five_check[8] = { 127, 127, 127, 127, 127, 127, 127, 127 },
+four_check[8] = { 127, 127, 127, 127, 127, 127, 127, 127 },
+lucklocation[10] = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 },
+lucksublocation[10] = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 },
+lucksubsublocation[10] = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 },
+luckiestlocation[10] = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 },
+luckiestsublocation[10] = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 },
+luckiestsubsublocation[10] = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 },
+pcount[128] = { 0 },
+four_pity[11] = { 0 },
+five_pity[90] = { 0 },
+five_pity_w[80] = { 0 };
 unsigned int resultt = 0,
 resultu = 0;
 ptrdiff_t chosen_event = 0,
@@ -170,7 +190,7 @@ static size_t rspick(const size_t* kindx, size_t sizekind) {
     unsigned int temp121 = 0;
     for (; index < sizekind; ++index)
     {
-        temp121 = generatorz() % static_cast<unsigned int>((static_cast<unsigned long long int>(index) + 1));
+        temp121 = static_cast<unsigned int>(generatorz() % (static_cast<unsigned long long int>(index) + 1));
         if (temp121 == 0) kindout = kindx[index];
     }
     return kindout;
@@ -210,21 +230,29 @@ static void casesx(size_t kind) {
     else { std::cout << E_1 << "  "; }
 } // cout stars prefix
 
-static void set_pool_1(size_t up_five_p, size_t size_nup_four_c_p, const size_t* tempg1, const size_t* tempg5, size_t* up_four_g, size_t* nup_four_c, const size_t* nup_four_cgm, size_t* four_check) {
-    up_five = up_five_p;
-    size_nup_four_c = size_nup_four_c_p;
-    for (size_t i = 0; i < 3; i++) { up_four_g[i] = tempg1[i]; }
-    for (size_t i = 0; i < size_nup_four_c; i++) { nup_four_c[i] = nup_four_cgm[i]; }
-    for (size_t i = 0; i < 8; i++) { four_check[i] = tempg5[i]; }
+static void ini_all(size_t* in, size_t ins, size_t nu) {
+    for (size_t i = 0; i < ins; i++) { in[i] = nu; }
 }
 
-static void set_pool_3(size_t* up_five_g, size_t size_nup_four_c_p, const size_t* tempg1, const size_t* tempg5, const size_t* tempg6, const size_t* tempg7, size_t* up_four_g, size_t* nup_four_c, const size_t* nup_four_cgm, size_t* four_check, size_t* five_check) {
-    for (size_t i = 0; i < 2; i++) { up_five_g[i] = tempg6[i]; }
+static void ini_ams(size_t* in, size_t ins, const size_t* out) {
+    for (size_t i = 0; i < ins; i++) { in[i] = out[i]; }
+}//for of the same size
+
+static void set_pool_1(size_t up_five_p, size_t size_nup_four_c_p, const size_t* tempg1, const size_t* tempg5, const size_t* nup_four_cgm) {
+    up_five = up_five_p;
     size_nup_four_c = size_nup_four_c_p;
-    for (size_t i = 0; i < 5; i++) { up_four_g[i] = tempg1[i]; }
-    for (size_t i = 0; i < size_nup_four_c; i++) { nup_four_c[i] = nup_four_cgm[i]; }
-    for (size_t i = 0; i < 8; i++) { four_check[i] = tempg5[i]; }
-    for (size_t i = 0; i < 8; i++) { five_check[i] = tempg7[i]; }
+    ini_ams(up_four_g, 3, tempg1);
+    ini_ams(nup_four_c, size_nup_four_c, nup_four_cgm);
+    ini_ams(four_check, 8, tempg5);
+}
+
+static void set_pool_3(size_t size_nup_four_c_p, const size_t* tempg1, const size_t* tempg5, const size_t* tempg6, const size_t* tempg7, const size_t* nup_four_cgm) {
+    ini_ams(up_five_g, 2, tempg6);
+    size_nup_four_c = size_nup_four_c_p;
+    ini_ams(up_four_g, 5, tempg1);
+    ini_ams(nup_four_c, size_nup_four_c, nup_four_cgm);
+    ini_ams(four_check, 8, tempg5);
+    ini_ams(five_check, 8, tempg7);
 }
 
 int main(int argc, char* argv[]) {
@@ -271,24 +299,23 @@ int main(int argc, char* argv[]) {
     min_fivesth = 1;
     max_fivecount = 1;
     min_fivecount = 1;
-    size_t up_five_g[2] = { 0 },
-        up_four_g[16] = { 0 },
-        nup_four_c[32] = { 0 },
-        luckkind[10] = { 127, 127, 127, 127, 127, 127, 127, 127, 127, 127 },
-        luckstar[10] = { 3, 3, 3, 3, 3, 3, 3, 3, 3, 3 },
-        luckiestkind[10] = { 127, 127, 127, 127, 127, 127, 127, 127, 127, 127 },
-        five_check[8] = { 127, 127, 127, 127, 127, 127, 127, 127 },
-        four_check[8] = { 127, 127, 127, 127, 127, 127, 127, 127 },
-        lucklocation[10] = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 },
-        lucksublocation[10] = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 },
-        lucksubsublocation[10] = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 },
-        luckiestlocation[10] = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 },
-        luckiestsublocation[10] = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 },
-        luckiestsubsublocation[10] = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 },
-        pcount[128] = { 0 },
-        four_pity[11] = { 0 },
-        five_pity[90] = { 0 },
-        five_pity_w[80] = { 0 };
+        ini_all(up_five_g, 2, 0);
+    ini_all(up_four_g, 16, 0);
+    ini_all(nup_four_c, 32, 0);
+    for (size_t i = 0; i < 10; i++) { luckstar[i] = 3; }
+    ini_all(luckiestkind, 10, 127);
+    ini_all(five_check, 8, 127);
+    ini_all(four_check, 8, 127);
+    ini_ams(lucklocation, 10, one_to_ten);
+    ini_ams(lucksublocation, 10, one_to_ten);
+    ini_ams(lucksubsublocation, 10, one_to_ten);
+    ini_ams(luckiestlocation, 10, one_to_ten);
+    ini_ams(luckiestsublocation, 10, one_to_ten);
+    ini_ams(luckiestsubsublocation, 10, one_to_ten);
+    ini_all(pcount, 128, 0);
+    ini_all(four_pity, 11, 0);
+    ini_all(five_pity, 90, 0);
+    ini_all(five_pity_w, 80, 0);
     if (argc == 4) {
         int test0 = 0;
         int test1 = 0;
@@ -303,18 +330,17 @@ int main(int argc, char* argv[]) {
             y_arg = true;
             goto full_quit;
         }
-        test0 = 1 + test1;
-        test1 = 1 + test0;
-        test2 = 1 + test2;
-        chosen_banner = stoi(argv[1]);
-        chosen_event = stoi(argv[2]);
-        wishes_number = stoll(argv[3]);
-        if (wishes_number < 1) {
-            wishes_number = 0;
+        test0 = std::stoi(argv[1]);
+        test1 = std::stoi(argv[2]);
+        test2 = std::stoll(argv[3]);
+        chosen_banner = static_cast<ptrdiff_t>(test0);
+        chosen_event = static_cast<ptrdiff_t>(test1);
+        if (test2 < 1) {
             std::cout << S_72 << "\n";
             y_arg = true;
             goto full_quit;
         }
+        else { wishes_number = test2; }
         quit = false;
         y_arg = true;
         goto set_banner;
@@ -459,8 +485,8 @@ set_banner:
             set_pool_1_m(99, 20, nup_four_cg9)
         } break;
         case 27: {
-            const size_t tempg1[3] = { 18, 22, 100 };
-            const size_t tempg5[8] = { 18, 22, 100, 0, 0, 0, 0, 0 };
+            const size_t tempg1[3] = { 16, 21, 95 };
+            const size_t tempg5[8] = { 16, 21, 95, 0, 0, 0, 0, 0 };
             set_pool_1_m(96, 20, nup_four_cg9)
         } break;
         default: { std::cout << E_5 << "\n"; goto full_quit; }
@@ -484,8 +510,8 @@ set_banner:
             set_pool_1_m(68, 19, nup_four_cg8)
         } break;
         case 4: {
-            const size_t tempg1[3] = { 24, 25, 71 };
-            const size_t tempg5[8] = { 24, 25, 71, 0, 0, 0, 0, 0 };
+            const size_t tempg1[3] = { 16, 21, 95 };
+            const size_t tempg5[8] = { 16, 21, 95, 0, 0, 0, 0, 0 };
             set_pool_1_m(94, 20, nup_four_cg9)
         } break;
         default: { std::cout << E_5 << "\n"; goto full_quit; }
@@ -669,9 +695,9 @@ set_banner:
             set_pool_3_m(20, nup_four_cg9)
         } break;
         case 26: {
-            const size_t tempg6[2] = { 112, 77 };
-            const size_t tempg1[5] = { 34, 36, 42, 47, 104 };
-            const size_t tempg5[8] = { 34, 36, 42, 47, 0, 0, 0, 0 };
+            const size_t tempg6[2] = { 97, 98 };
+            const size_t tempg1[5] = { 37, 40, 46, 102, 104 };
+            const size_t tempg5[8] = { 37, 40, 46, 0, 0, 0, 0, 0 };
             const size_t tempg7[8] = { 0, 0, 0, 0, 0, 0, 0, 0 };
             set_pool_3_m(20, nup_four_cg9)
         } break;
@@ -912,7 +938,7 @@ set_banner:
                             type = 2;
                             five_count_w++;
                             kind = rspick(nup_five_w, 10);
-                            fate_points++;
+                            if (kind == up_five_g[fate_weapon - 1]) fate_points = 0; else fate_points++;
                             if ((kind == five_check[0] || kind == five_check[1] || kind == five_check[2] || kind == five_check[3] || kind == five_check[4] || kind == five_check[5] || kind == five_check[6] || kind == five_check[7])) five_star_guarantee_number = false; else five_star_guarantee_number = true;
                         }
                     }
@@ -1327,17 +1353,21 @@ set_banner:
         if (chosen_banner == 5 || four_count == 0 || five_count == 0) { wishes_number = 0; std::cout << S_72 << "\n"; goto print_2; }
         else if (chosen_banner == 1 || chosen_banner == 2 || chosen_banner == 4) {
             std::cout << S_88 << "\n\n";
+            std::cout << std::fixed << std::setprecision(8);
             for (size_t iout = 0; iout < 10; iout++) { std::cout << iout + 1 << "  " << four_pity[iout] << "   " << static_cast<double>(four_pity[iout]) * 100.0 / static_cast<double>(four_count) << "%\n"; }
             std::cout << "10+  " << four_pity[10] << "   " << static_cast<double>(four_pity[10]) * 100.0 / static_cast<double>(four_count) << "%\n\n" << S_89 << "\n\n";
-            for (size_t iout = 0; iout < 90; iout++) { std::cout << fixed << iout + 1 << "  " << five_pity[iout] << "   " << static_cast<double>(five_pity[iout]) * 100.0 / static_cast<double>(five_count) << "%\n"; }
+            for (size_t iout = 0; iout < 90; iout++) { std::cout << iout + 1 << "  " << five_pity[iout] << "   " << static_cast<double>(five_pity[iout]) * 100.0 / static_cast<double>(five_count) << "%\n"; }
+            std::cout << std::defaultfloat;
             wishes_number = 0;
             goto print_2;
         }
         else if (chosen_banner == 3) {
             std::cout << S_88 << "\n\n";
+            std::cout << std::fixed << std::setprecision(8);
             for (size_t iout = 0; iout < 10; iout++) { std::cout << iout + 1 << "  " << four_pity[iout] << "   " << static_cast<double>(four_pity[iout]) * 100.0 / static_cast<double>(four_count) << "%\n"; }
             std::cout << "10+  " << four_pity[10] << "   " << static_cast<double>(four_pity[10]) * 100.0 / static_cast<double>(four_count) << "%\n\n" << S_89 << "\n\n";
-            for (size_t iout = 0; iout < 80; iout++) { std::cout << fixed << iout + 1 << "  " << five_pity_w[iout] << "   " << static_cast<double>(five_pity_w[iout]) * 100.0 / static_cast<double>(five_count) << "%\n"; }
+            for (size_t iout = 0; iout < 80; iout++) { std::cout << iout + 1 << "  " << five_pity_w[iout] << "   " << static_cast<double>(five_pity_w[iout]) * 100.0 / static_cast<double>(five_count) << "%\n"; }
+            std::cout << std::defaultfloat;
             wishes_number = 0;
             goto print_2;
         }
