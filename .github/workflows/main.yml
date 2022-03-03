@@ -15,6 +15,7 @@ jobs:
         run: g++ -s -o3 source.cpp -o giwsfo
       - uses: ncipollo/release-action@v1
         with:
+          allowUpdates: true
           artifacts: "giwsfo"
           tag: "actions-build"
           token: ${{ secrets.GITHUB_TOKEN }}
