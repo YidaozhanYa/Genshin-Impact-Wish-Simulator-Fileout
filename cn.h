@@ -1,6 +1,6 @@
 ﻿#pragma once
 #ifndef CN_H
-#define S_1 "文件输出的无窗口的原神祈愿模拟器 V2.5.12"
+#define S_1 "文件输出的无窗口的原神祈愿模拟器 V2.5.16"
 #define S_2 "作者: Jirehlov Research"
 #define S_3 "开源于GitHub: Jirehlov_Genshin-Impact-Wish-Simulator-Fileout"
 #define S_4 "GPL-3.0 License"
