@@ -18,7 +18,7 @@ Statistics;
 ### How to build:
 
 ```
-g++ -s -o3 source.cpp -o giwsfo
+g++ -s -o3 main.cpp lib/giwscli.cpp lib/random_gen.cpp -o giwsfo
 ```
 Or Visual Studio, etc.
 
@@ -130,7 +130,7 @@ This simulator includes no hidden possibilities.
 ### 如何编译:
 
 ```
-g++ -s -o3 source.cpp -o giwsfo
+g++ -s -o3 main.cpp lib/giwscli.cpp lib/random_gen.cpp -o giwsfo
 ```
 或者Visual Studio等其他方法。
 
