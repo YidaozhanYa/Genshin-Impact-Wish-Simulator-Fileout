@@ -1,5 +1,5 @@
 #ifndef RANDOM_GEN_H
-#define RANDOM_GEN_H 1
+#define RANDOM_GEN_H
 #include <random>
 
 extern std::random_device seed_gen;
