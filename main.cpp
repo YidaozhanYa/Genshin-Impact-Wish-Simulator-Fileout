@@ -176,7 +176,7 @@ int main(int argc, char* argv[]) {
 	max_fivecount = 1;
 	min_fivecount = 1;
 	ini_all(up_five_g, 2, 0);
-	ini_all(up_four_g, 16, 0);
+	ini_all(up_four_g, 5, 0);
 	ini_all(nup_four_c, 32, 0);
 	for (size_t i = 0; i < 10; i++) { luckstar[i] = 3; }
 	ini_all(luckiestkind, 10, 127);
