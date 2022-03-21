@@ -1,14 +1,14 @@
 ﻿#include <fstream>
 #include <iomanip>
 #include <string>
-#include "cn.h" //include the language header file
+#include "en.h" //include the language header file
 #include "lib/giwscli.h"
 
 using namespace giwscli;
 
 #define output_string() {std::cout << countx + 1 << "(" << five_star_assurance_number << ")(" << four_star_assurance_number << ") ";\
                     casesx( kind );\
-                    std::cout << pname[kind] << '\n'; \
+                    std::cout << s_pname_en[kind] << '\n'; \
                     pcount[kind]++;\
                     wishes_number--;\
                     countx++;\
@@ -66,48 +66,6 @@ luckiestsublocation[10] = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 },
 luckiestsubsublocation[10] = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
 signed long long int  wishes_number = 0;
 auto elapsed_time = std::chrono::duration_cast<std::chrono::microseconds>(elapsed).count();
-
-static const char* pname[128] = { C_0, C_1, C_2, C_3, C_4, C_5, C_6, C_7, C_8, C_9, C_10, C_11, C_12, C_13, C_14, C_15, C_16, C_17, C_18, C_19, C_20,
-				C_21, C_22, C_23, C_24, C_25, C_26, C_27, C_28, C_29, C_30, C_31, C_32, C_33, C_34, C_35, C_36, C_37, C_38, C_39, C_40,
-				C_41, C_42, C_43, C_44, C_45, C_46, C_47, C_48, C_49, C_50, C_51, C_52, C_53, C_54, C_55, C_56, C_57, C_58, C_59, C_60,
-				C_61, C_62, C_63, C_64, C_65, C_66, C_67, C_68, C_69, C_70, C_71, C_72, C_73, C_74, C_75, C_76, C_77, C_78, C_79, C_80,
-				C_81, C_82, C_83, C_84, C_85, C_86, C_87, C_88, C_89, C_90, C_91, C_92, C_93, C_94, C_95, C_96, C_97, C_98, C_99, C_100,
-				C_101, C_102, C_103, C_104, C_105, C_106, C_107, C_108, C_109, C_110, C_111, C_112, C_113, C_114,
-				"Placeholder",
-				"Placeholder",
-				"Placeholder",
-				"Placeholder",
-				"Placeholder",
-				"Placeholder",
-				"Placeholder",
-				"Placeholder",
-				"Placeholder",
-				"Placeholder",
-				"Placeholder",
-				"Placeholder",
-				"Placeholder",
-};
-static const char* pnameshort[128] = { X_0, X_1, X_2, X_3, X_4, X_5, X_6, X_7, X_8, X_9, X_10, X_11, X_12, X_13, X_14, X_15, X_16, X_17, X_18, X_19, X_20,
-				X_21, X_22, X_23, X_24, X_25, X_26, X_27, X_28, X_29, X_30, X_31, X_32, X_33, X_34, X_35, X_36, X_37, X_38, X_39, X_40,
-				X_41, X_42, X_43, X_44, X_45, X_46, X_47, X_48, X_49, X_50, X_51, X_52, X_53, X_54, X_55, X_56, X_57, X_58, X_59, X_60,
-				X_61, X_62, X_63, X_64, X_65, X_66, X_67, X_68, X_69, X_70, X_71, X_72, X_73, X_74, X_75, X_76, X_77, X_78, X_79, X_80,
-				X_81, X_82, X_83, X_84, X_85, X_86, X_87, X_88, X_89, X_90, X_91, X_92, X_93, X_94, X_95, X_96, X_97, X_98, X_99, X_100,
-				X_101, X_102, X_103, X_104, X_105, X_106, X_107, X_108, X_109, X_110, X_111, X_112, X_113, X_114,
-				"Placeholder",
-				"Placeholder",
-				"Placeholder",
-				"Placeholder",
-				"Placeholder",
-				"Placeholder",
-				"Placeholder",
-				"Placeholder",
-				"Placeholder",
-				"Placeholder",
-				"Placeholder",
-				"Placeholder",
-				"Placeholder",
-};
-// names of the items
 
 static void casesx(size_t kind_p) {
   if (kind_p < 15) {
@@ -346,18 +304,18 @@ set_banner:
 			<< S_83 << static_cast<double>(ave_fives) * 1.0 / static_cast<double>(five_count) << '\n'
 			<< S_77 << five_count_c << " : " << five_count_w << " : " << four_count_c << " : " << four_count_w << "\n\n";
 	}
-	for (const size_t iout : five_stars_c) { if (pcount[iout] > 0) std::cout << pnameshort[iout] << "(" << pcount[iout] << ") "; }
-	for (const size_t iout : five_stars_w) { if (pcount[iout] > 0) std::cout << pnameshort[iout] << "(" << pcount[iout] << ") "; }
+	for (const size_t iout : five_stars_c) { if (pcount[iout] > 0) std::cout << s_pnameshort_en[iout] << "(" << pcount[iout] << ") "; }
+	for (const size_t iout : five_stars_w) { if (pcount[iout] > 0) std::cout << s_pnameshort_en[iout] << "(" << pcount[iout] << ") "; }
 	if (five_count > 0) { std::cout << "\n\n"; }
-	for (const size_t iout : four_stars_c) { if (pcount[iout] > 0) std::cout << pnameshort[iout] << "(" << pcount[iout] << ") "; }
-	for (const size_t iout : four_stars_w) { if (pcount[iout] > 0) std::cout << pnameshort[iout] << "(" << pcount[iout] << ") "; }
+	for (const size_t iout : four_stars_c) { if (pcount[iout] > 0) std::cout << s_pnameshort_en[iout] << "(" << pcount[iout] << ") "; }
+	for (const size_t iout : four_stars_w) { if (pcount[iout] > 0) std::cout << s_pnameshort_en[iout] << "(" << pcount[iout] << ") "; }
 	std::cout << "\n\n";
 	if (countx < 10) { std::cout << S_62 << '\n'; goto print_1; }
 	std::cout << S_63 << luckiest << '\n';
 	for (size_t templuck = 0; templuck < 10; templuck++) {
 		std::cout << luckiestlocation[templuck] << "(" << luckiestsublocation[templuck] << ")(" << luckiestsubsublocation[templuck] << ") ";
 		casesx(luckiestkind[templuck]);
-		std::cout << pname[luckiestkind[templuck]] << '\n';
+		std::cout << s_pname_en[luckiestkind[templuck]] << '\n';
 	}
 print_1:
 	std::cout << '\n';
