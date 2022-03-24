@@ -96,7 +96,7 @@ static void casesx(size_t kind_p) {
              kind_p == 95 || kind_p == 100 || kind_p == 102 || kind_p == 103 ||
              kind_p == 104 || kind_p == 106 || kind_p == 108) {
     std::cout << "!!**** ";
-  } else if (kind_p < 115) {
+  } else if (kind_p < MAX_ITEMS) {
     std::cout << "!!!!!***** ";
   } else {
     std::cout << CN_E_1 << "  ";
