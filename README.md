@@ -1,6 +1,9 @@
-﻿## Genshin-Impact-Wish-Simulator-Fileout
+﻿# Genshin-Impact-Wish-Simulator-Fileout
 
 [![License](https://img.shields.io/badge/Licence-GPL-blue.svg)](https://github.com/Jirehlov/GenshinImpactWishSimulatorCLI/blob/master/LICENSE)
+
+## Library
+[libgiwscli](https://github.com/Jirehlov/libgiwscli)
 
 ## Other versions
 
@@ -18,7 +21,7 @@ Statistics;
 ### How to build:
 
 ```
-g++ -s -o3 source.cpp -o giwsfo
+g++ -s -o3 main.cpp lib/giwscli.cpp lib/random_gen.cpp -o giwsfo
 ```
 Or Visual Studio, etc.
 
@@ -63,13 +66,15 @@ I Character Event Wish\
 24: The Transcendent One Returns/20220105-20220125 (Shenhe, Yun Jin, Ningguang, Chongyun)\
 25: Gentry of Hermitage/20220125-20220215 (Zhongli, Yanfei, Xingqiu, Beidou)\
 26: Everbloom Violet/20220216-20220308 (Yae Miko, Fischl, Diona, Thoma)\
-27: Reign of Serenity/20220308-20220329 (Raiden Shogun, Bennett, Xinyan, Kujo Sara)
+27: Reign of Serenity/20220308-20220329 (Raiden Shogun, Bennett, Xinyan, Kujo Sara)\
+28: Azure Excursion/20220330-20220419 (Kamisato Ayato, Yun Jin, Sucrose, Xiangling)
 
 II Character Event Wish-2\
 1: Born of Ocean Swell/20211124-20211214 (Eula, Rosaria, Noelle, Bennett)\
 2: Invitation to Mundane Life/20220105-20220125 (Xiao, Yun Jin, Ningguang, Chongyun)\
 3: Adrift in the Harbor/20220125-20220215 (Ganyu, Yanfei, Xingqiu, Beidou)\
-4: Drifting Luminescence/20220308-20220329 (Sangonomiya Kokomi, Bennett, Xinyan, Kujo Sara)
+4: Drifting Luminescence/20220308-20220329 (Sangonomiya Kokomi, Bennett, Xinyan, Kujo Sara)\
+5: Ballad in Goblets/20220330-20220419 (Venti, Yun Jin, Sucrose, Xiangling)
 
 III Weapon Event Wish\
 1: Epitome Invocation/20200928-20201018 (Aquila Favonia, Amos' Bow, The Flute, The Bell, The Widsith, The Stringless, Favonius Lance)\
@@ -97,7 +102,8 @@ III Weapon Event Wish\
 23: Epitome Invocation/20220105-20220125 (Calamity Queller, Primordial Jade Winged-Spear, Lithic Spear, The Flute, Favonius Warbow, The Widsith, Favonius Greatsword)\
 24: Epitome Invocation/20220125-20220215 (Vortex Vanquisher, Amos' Bow, Lithic Blade, Favonius Sword, Dragon's Bane, Favonius Codex, Sacrificial Bow)\
 25: Epitome Invocation/20220216-20220308 (Kagura's Verity, Primordial Jade Cutter, Wavebreaker's Fin, Stringless, Sacrificial Sword, Eye of Perception, Rainslasher)\
-26: Epitome Invocation/20220308-20220329 (Engulfing Lightning, Everlasting Moonglow, Akuoumaru, Mouun's Moon, Dragon's Bane, Favonius Lance, Sacrificial Fragments)
+26: Epitome Invocation/20220308-20220329 (Engulfing Lightning, Everlasting Moonglow, Akuoumaru, Mouun's Moon, Dragon's Bane, Favonius Lance, Sacrificial Fragments)\
+27: Epitome Invocation/20220330-20220419 (Haran Tsukishiro Futsu, Elegy of the End, Rust, The Flute, The Widsith, Dragon's Bane, Sacrificial Greatsword)
 
 IV Permanent Wish\
 1: Wanderlust Invocation/20200928-20201222 (Released)\
@@ -130,7 +136,7 @@ This simulator includes no hidden possibilities.
 ### 如何编译:
 
 ```
-g++ -s -o3 source.cpp -o giwsfo
+g++ -s -o3 main.cpp lib/giwscli.cpp lib/random_gen.cpp -o giwsfo
 ```
 或者Visual Studio等其他方法。
 
@@ -175,13 +181,15 @@ giwsfo 1 2 100
 24: 出尘入世/20220105-20220125 (申鹤, 云堇, 凝光, 重云)\
 25: 陵薮市朝/20220125-20220215 (钟离, 烟绯, 行秋, 北斗)\
 26: 华紫樱绯/20220216-20220308 (八重神子, 菲谢尔, 迪奥娜, 托马)\
-27: 影寂天下人/20220308-20220329 (雷电将军, 班尼特, 辛焱, 九条裟罗)
+27: 影寂天下人/20220308-20220329 (雷电将军, 班尼特, 辛焱, 九条裟罗)\
+28: 苍流踏花/20220330-20220419 (神里绫人, 云堇, 砂糖, 香菱)
 
 二、角色活动祈愿-2\
 1: 浪涌之瞬/20211124-20211214 (优菈, 罗莎莉亚, 诺艾尔, 班尼特)\
 2: 烟火之邀/20220105-20220125 (魈, 云堇, 凝光, 重云)\
 3: 浮生孰来/20220125-20220215 (甘雨, 烟绯, 行秋, 北斗)\
-4: 浮岳虹珠/20220308-20220329 (珊瑚宫心海, 班尼特, 辛焱, 九条裟罗)
+4: 浮岳虹珠/20220308-20220329 (珊瑚宫心海, 班尼特, 辛焱, 九条裟罗)\
+5: 杯装之诗/20220330-20220419 (温迪, 云堇, 砂糖, 香菱)
 
 三、武器活动祈愿\
 1: 神铸赋形/20200928-20201018 (风鹰剑, 阿莫斯之弓, 笛剑, 钟剑, 流浪乐章, 绝弦, 西风长枪)\
@@ -209,7 +217,8 @@ giwsfo 1 2 100
 23: 神铸赋形/20220105-20220125 (息灾, 和璞鸢, 千岩长枪, 笛剑, 西风猎弓, 流浪乐章, 西风大剑)\
 24: 神铸赋形/20220125-20220215 (贯虹之槊, 阿莫斯之弓, 千岩古剑, 西风剑, 匣里灭辰, 西风秘典, 祭礼弓)\
 25: 神铸赋形/20220216-20220308 (神乐之真意, 磐岩结绿, 断浪长鳍, 绝弦, 祭礼剑, 昭心, 雨裁)\
-26: 神铸赋形/20220308-20220329 (薙草之稻光, 不灭月华, 恶玉丸, 曚云之月, 匣里龙吟, 西风长枪, 祭礼残章)
+26: 神铸赋形/20220308-20220329 (薙草之稻光, 不灭月华, 恶玉丸, 曚云之月, 匣里龙吟, 西风长枪, 祭礼残章)\
+27: 神铸赋形/20220330-20220419 (波乱月白经津, 终末嗟叹之诗, 弓藏, 笛剑, 流浪乐章, 匣里灭辰, 祭礼大剑)
 
 四、常驻祈愿\
 1: 奔行世间/20200928-20201222 (公测)\
