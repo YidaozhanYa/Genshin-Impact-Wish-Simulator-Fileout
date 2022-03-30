@@ -12,7 +12,9 @@ jobs:
       - uses: actions/checkout@v2
 
       - name: build
-        run: g++ -s -o3 main.cpp lib/giwscli.cpp lib/random_gen.cpp -o giwsfo
+        run: |
+          git submodule update --init
+          g++ -s -o3 main.cpp lib/giwscli.cpp lib/random_gen.cpp -o giwsfo
       - uses: ncipollo/release-action@v1
         with:
           allowUpdates: true
